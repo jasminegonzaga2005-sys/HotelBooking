@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "customerBookingAPI\\customerBookingAPI.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
