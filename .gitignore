@@ -27,3 +27,9 @@ logs/
 
 # ASP.NET
 appsettings.Development.json
+
+# Visual Studio / MSBuild temporary files
+*.tmp
+*.bak
+*.Backup.tmp
+*.cache
