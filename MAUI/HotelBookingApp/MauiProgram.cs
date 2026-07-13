@@ -1,4 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System;
+using HotelBookingApp.Services;
+using Microsoft.Extensions.Logging;
+//using Microsoft.Extensions.Http;
+
+
 
 namespace HotelBookingApp
 {
@@ -16,6 +21,11 @@ namespace HotelBookingApp
                 });
 
 #if DEBUG
+            builder.Services.AddHttpClient<ApiService>(client =>
+            {
+                client.BaseAddress = new Uri("http://10.0.2.2:7068/");
+            });
+
     		builder.Logging.AddDebug();
 #endif
 
