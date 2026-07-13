@@ -33,3 +33,4 @@ appsettings.Development.json
 *.bak
 *.Backup.tmp
 *.cache
+MAUI/HotelBookingApp/HotelBookingApp.csproj.user
