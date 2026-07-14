@@ -31,7 +31,7 @@ public partial class DashboardPage : ContentPage
 
     private async void Profile_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Profile", "This page is under development.", "OK"); //To be edit for navigation 
+        await DisplayAlert("Profile", "This page is under development.", "OK"); //To be edit for navigation to ProfilePage
     }
 
     private async void StandardRoom_Clicked(object sender, EventArgs e)

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HotelBookingApp.Views.ProfilePage"
+    Title="Profile"
+    BackgroundColor="#F4F8FB">
+
+    <Grid Padding="20"
+          RowDefinitions="Auto,*,Auto"
+          RowSpacing="15">
+
+        <Label
+            Grid.Row="0"
+            Text="Profile"
+            FontSize="28"
+            FontAttributes="Bold"
+            TextColor="#0F4C81" />
+
+        <Frame
+            Grid.Row="1"
+            BackgroundColor="White"
+            BorderColor="#D8E2EC"
+            CornerRadius="16"
+            Padding="20"
+            HasShadow="False">
+
+            <Grid
+                RowDefinitions="Auto,*,Auto"
+                RowSpacing="15">
+
+                <VerticalStackLayout
+                    Grid.Row="0"
+                    HorizontalOptions="Center">
+
+                    <Frame
+                        WidthRequest="80"
+                        HeightRequest="80"
+                        CornerRadius="40"
+                        BackgroundColor="#EAF2F8"
+                        BorderColor="#D8E2EC"
+                        Padding="0"
+                        HasShadow="False">
+
+                        <Label
+                            Text="JD"
+                            FontSize="26"
+                            FontAttributes="Bold"
+                            TextColor="#0F4C81"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+
+                    </Frame>
+
+                </VerticalStackLayout>
+
+                <ScrollView Grid.Row="1">
+
+                    <VerticalStackLayout Spacing="15">
+
+                        <VerticalStackLayout Spacing="4">
+                            <!-- This must reflect the customer ID of the logged in user, like yung asa database shit -->
+                            <Label
+                                Text="CUSTOMER ID"
+                                FontSize="11"
+                                FontAttributes="Bold"
+                                TextColor="#0F4C81"
+                                Opacity="0.6"/>
+                            <Entry
+                                Text="1"
+                                IsReadOnly="True"
+                                BackgroundColor="#F4F8FB"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                Text="FULL NAME"
+                                FontSize="11"
+                                FontAttributes="Bold"
+                                TextColor="#0F4C81"
+                                Opacity="0.6"/>
+                            <Entry
+                                Text="John Doe"
+                                IsReadOnly="True"
+                                BackgroundColor="#F4F8FB"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                Text="EMAIL ADDRESS"
+                                FontSize="11"
+                                FontAttributes="Bold"
+                                TextColor="#0F4C81"
+                                Opacity="0.6"/>
+                            <Entry
+                                Text="johndoe@email.com"
+                                IsReadOnly="True"
+                                BackgroundColor="#F4F8FB"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                Text="PHONE NUMBER"
+                                FontSize="11"
+                                FontAttributes="Bold"
+                                TextColor="#0F4C81"
+                                Opacity="0.6"/>
+                            <Entry
+                                Text="+63 912 345 6789"
+                                IsReadOnly="True"
+                                BackgroundColor="#F4F8FB"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                Text="PASSWORD"
+                                FontSize="11"
+                                FontAttributes="Bold"
+                                TextColor="#0F4C81"
+                                Opacity="0.6"/>
+                            <Entry
+                                Text="password"
+                                IsPassword="True"
+                                IsReadOnly="True"
+                                BackgroundColor="#F4F8FB"/>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+
+                </ScrollView>
+
+                <Button
+                    Grid.Row="2"
+                    Text="Log Out"
+                    HeightRequest="50"
+                    CornerRadius="10"
+                    BackgroundColor="#0F4C81"
+                    TextColor="White"/>
+
+            </Grid>
+
+        </Frame>
+
+        <Frame
+            Grid.Row="2"
+            BackgroundColor="#EAF2F8"
+            CornerRadius="16"
+            Padding="12"
+            HasShadow="False">
+
+            <Grid
+                ColumnDefinitions="*,*,*,*"
+                ColumnSpacing="10">
+
+                <Button
+                    Grid.Column="0"
+                    Text="Book&#10;Room"
+                    BackgroundColor="White"
+                    TextColor="#0F4C81"
+                    CornerRadius="10"
+                    FontSize="12"/>
+
+                <Button
+                    Grid.Column="1"
+                    Text="My&#10;Bookings"
+                    BackgroundColor="White"
+                    TextColor="#0F4C81"
+                    CornerRadius="10"
+                    FontSize="12"/>
+
+                <Button
+                    Grid.Column="2"
+                    Text="Home"
+                    BackgroundColor="White"
+                    TextColor="#0F4C81"
+                    CornerRadius="10"
+                    FontSize="12"/>
+
+                <Button
+                    Grid.Column="3"
+                    Text="Profile"
+                    BackgroundColor="#0F4C81"
+                    TextColor="White"
+                    CornerRadius="10"
+                    FontSize="12"/>
+
+            </Grid>
+
+        </Frame>
+
+    </Grid>
+
+</ContentPage>
