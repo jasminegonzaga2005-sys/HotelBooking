@@ -21,7 +21,7 @@ public partial class DashboardPage : ContentPage
 
     private async void MyBookings_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("My Bookings", "This page is under development.", "OK"); //To be edit for navigation 
+        await DisplayAlert("My Bookings", "This page is under development.", "OK"); //To be edit for navigation to MyBookingsPage
     }
 
     private async void Home_Clicked(object sender, EventArgs e)
