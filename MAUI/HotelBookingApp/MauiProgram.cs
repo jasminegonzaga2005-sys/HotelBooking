@@ -24,7 +24,8 @@ namespace HotelBookingApp
 #if DEBUG
             builder.Services.AddHttpClient<ApiService>(client =>
             {
-                client.BaseAddress = new Uri("http://10.0.2.2:7068/");
+                //client.BaseAddress = new Uri("http://10.0.2.2:5226/");
+                client.BaseAddress = new Uri("https://localhost:7068/");
             });
 
             builder.Services.AddTransient<LoginViewModel>();
