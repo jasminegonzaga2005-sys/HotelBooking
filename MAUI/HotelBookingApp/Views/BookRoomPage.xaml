@@ -6,136 +6,328 @@
     Title="Book a Room"
     BackgroundColor="#F5F7FA">
 
+
     <Grid RowDefinitions="*,Auto">
 
-        <ScrollView>
+
+        <ScrollView Grid.Row="0">
 
             <VerticalStackLayout
-                Padding="20"
-                Spacing="20">
+                Padding="20,30"
+                Spacing="20"
+                MaximumWidthRequest="420"
+                HorizontalOptions="Center">
 
+
+                <!-- Title -->
                 <Label
                     Text="Book a Room"
-                    FontSize="28"
+                    FontSize="30"
                     FontAttributes="Bold"
-                    TextColor="#0F4C81"/>
+                    TextColor="#0F4C81" />
 
+
+                <!-- Available Rooms -->
                 <Frame
-                    BackgroundColor="White"
                     CornerRadius="15"
+                    Padding="20"
+                    BorderColor="#D8E2EC"
+                    BackgroundColor="White"
                     HasShadow="False">
 
-                    <VerticalStackLayout
-                        Spacing="15">
+
+                    <VerticalStackLayout Spacing="12">
+
 
                         <Label
-                            Text="Select a Room"
-                            FontSize="20"
+                            Text="Available Rooms"
+                            FontSize="22"
                             FontAttributes="Bold"
-                            TextColor="#0F4C81"/>
+                            TextColor="#0F4C81" />
 
-                        <Picker Title="Choose Room">
-                            <Picker.Items>
-                                <x:String>Standard Room</x:String>
-                                <x:String>Superior Room</x:String>
-                                <x:String>Deluxe Room</x:String>
-                                <x:String>Family Room</x:String>
-                                <x:String>Executive Suite</x:String>
-                            </Picker.Items>
-                        </Picker>
+
+
+                        <!-- Column Headers -->
+                        <Grid
+                            ColumnDefinitions="*,*"
+                            Padding="15,10"
+                            BackgroundColor="#EAF2F8">
+
+
+                            <Label
+                                Text="Room Number"
+                                FontAttributes="Bold"
+                                TextColor="#0F4C81" />
+
+
+                            <Label
+                                Grid.Column="1"
+                                Text="Room Type"
+                                FontAttributes="Bold"
+                                TextColor="#0F4C81" />
+
+
+                        </Grid>
+
+
+
+
+                        <!-- Room List -->
+                        <CollectionView
+                            HeightRequest="300"
+                            ItemsSource="{Binding AvailableRooms}"
+                            SelectionMode="None">
+
+
+                            <CollectionView.ItemTemplate>
+
+                                <DataTemplate>
+
+
+                                    <Frame
+                                        Margin="0,3"
+                                        Padding="15"
+                                        CornerRadius="10"
+                                        BorderColor="#D8E2EC"
+                                        BackgroundColor="White"
+                                        HasShadow="False">
+
+
+                                        <Grid ColumnDefinitions="*,*">
+
+
+                                            <Grid.GestureRecognizers>
+
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.SelectRoomCommand}"
+                                                    CommandParameter="{Binding .}" />
+
+                                            </Grid.GestureRecognizers>
+
+
+
+                                            <Label
+                                                Text="{Binding RoomNum}"
+                                                FontSize="16"
+                                                FontAttributes="Bold"
+                                                TextColor="#0F4C81"
+                                                VerticalOptions="Center" />
+
+
+
+                                            <Label
+                                                Grid.Column="1"
+                                                Text="{Binding RoomType.RoomTypeName}"
+                                                FontSize="16"
+                                                TextColor="#444"
+                                                VerticalOptions="Center" />
+
+
+                                        </Grid>
+
+
+                                    </Frame>
+
+
+                                </DataTemplate>
+
+
+                            </CollectionView.ItemTemplate>
+
+
+                        </CollectionView>
+
+
+
+                        <!-- Selected Room -->
+                        <Frame
+                            Margin="0,10,0,0"
+                            Padding="15"
+                            CornerRadius="10"
+                            BorderColor="#D8E2EC"
+                            BackgroundColor="#EAF2F8"
+                            HasShadow="False">
+
+
+                            <VerticalStackLayout Spacing="5">
+
+
+                                <Label
+                                    Text="Selected Room"
+                                    FontSize="18"
+                                    FontAttributes="Bold"
+                                    TextColor="#0F4C81" />
+
+
+
+                                <Label
+                                    Text="{Binding SelectedRoom.RoomNum, StringFormat='Room Number: {0}'}"
+                                    TextColor="#444" />
+
+
+
+                                <Label
+                                    Text="{Binding SelectedRoom.RoomType.RoomTypeName, StringFormat='Room Type: {0}'}"
+                                    TextColor="#444" />
+
+
+                            </VerticalStackLayout>
+
+
+                        </Frame>
+
 
                     </VerticalStackLayout>
 
+
                 </Frame>
 
+
+
+
+
+                <!-- Booking Details -->
                 <Frame
-                    BackgroundColor="White"
                     CornerRadius="15"
+                    Padding="20"
+                    BorderColor="#D8E2EC"
+                    BackgroundColor="White"
                     HasShadow="False">
 
-                    <VerticalStackLayout
-                        Spacing="15">
+
+                    <VerticalStackLayout Spacing="15">
+
 
                         <Label
                             Text="Booking Details"
-                            FontSize="20"
+                            FontSize="22"
                             FontAttributes="Bold"
-                            TextColor="#0F4C81"/>
+                            TextColor="#0F4C81" />
+
+
 
                         <Label
                             Text="Check-in Date"
-                            FontAttributes="Bold"/>
+                            FontAttributes="Bold"
+                            TextColor="#0F4C81" />
 
-                        <DatePicker/>
+
+                        <DatePicker
+                            HeightRequest="45"
+                            Date="{Binding CheckInDate}" />
+
+
 
                         <Label
                             Text="Check-out Date"
-                            FontAttributes="Bold"/>
+                            FontAttributes="Bold"
+                            TextColor="#0F4C81" />
 
-                        <DatePicker/>
+
+                        <DatePicker
+                            HeightRequest="45"
+                            Date="{Binding CheckOutDate}" />
+
+
 
                         <Label
                             Text="Guests"
-                            FontAttributes="Bold"/>
+                            FontAttributes="Bold"
+                            TextColor="#0F4C81" />
+
+
 
                         <Entry
                             Placeholder="Enter number of guests"
-                            Keyboard="Numeric"/>
-                        <!--may validation dapat to ensure that the number of guests does not exceed the room capacity-->
+                            Keyboard="Numeric"
+                            HeightRequest="45"
+                            BackgroundColor="#F8FAFC"
+                            Text="{Binding Guests}" />
+
 
                     </VerticalStackLayout>
 
+
                 </Frame>
 
+
+
+
+
+                <!-- Book Button -->
                 <Button
                     Text="Book Now"
                     HeightRequest="50"
                     CornerRadius="10"
+                    FontSize="16"
                     BackgroundColor="#0F4C81"
                     TextColor="White"
-                    Clicked="BookNow_Clicked"/>
+                    Command="{Binding BookRoomCommand}" />
+
+
 
             </VerticalStackLayout>
 
+
         </ScrollView>
 
-        <Frame
+
+
+
+
+        <!-- Bottom Navigation -->
+        <Grid
             Grid.Row="1"
-            BackgroundColor="#EAF2F8"
-            CornerRadius="16"
             Padding="15"
-            HasShadow="False">
+            BackgroundColor="#EAF2F8"
+            ColumnDefinitions="*,*,*,*"
+            ColumnSpacing="10">
 
-            <Grid
-                ColumnDefinitions="*,*,*,*"
-                ColumnSpacing="10">
 
-                <Button
-                    Grid.Column="0"
-                    Text="Book&#10;Room"
-                    HeightRequest="60"
-                    BackgroundColor="#0F4C81"
-                    TextColor="White"/>
 
-                <Button
-                    Grid.Column="1"
-                    Text="My&#10;Bookings"
-                    HeightRequest="60"/>
+            <Button
+                Grid.Column="0"
+                Text="Book&#10;Room"
+                HeightRequest="60"
+                CornerRadius="10"
+                BackgroundColor="#0F4C81"
+                TextColor="White" />
 
-                <Button
-                    Grid.Column="2"
-                    Text="Home"
-                    HeightRequest="60"/>
 
-                <Button
-                    Grid.Column="3"
-                    Text="Profile"
-                    HeightRequest="60"/>
 
-            </Grid>
+            <Button
+                Grid.Column="1"
+                Text="My&#10;Bookings"
+                HeightRequest="60"
+                CornerRadius="10"
+                BackgroundColor="White"
+                TextColor="#0F4C81" />
 
-        </Frame>
+
+
+            <Button
+                Grid.Column="2"
+                Text="Home"
+                HeightRequest="60"
+                CornerRadius="10"
+                BackgroundColor="White"
+                TextColor="#0F4C81" />
+
+
+
+            <Button
+                Grid.Column="3"
+                Text="Profile"
+                HeightRequest="60"
+                CornerRadius="10"
+                BackgroundColor="White"
+                TextColor="#0F4C81" />
+
+
+        </Grid>
+
 
     </Grid>
+
 
 </ContentPage>

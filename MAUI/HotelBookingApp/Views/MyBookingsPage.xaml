@@ -2,171 +2,230 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:HotelBookingApp.Converters"
     x:Class="HotelBookingApp.Views.MyBookingsPage"
     BackgroundColor="#F4F8FB"
     Title="My Bookings">
 
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <converters:BookingStatusColorConverter
+                x:Key="BookingStatusColorConverter"/>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+
     <Grid RowDefinitions="Auto,*,Auto"
           Padding="20"
           RowSpacing="15">
+
+
+        <!-- Title -->
         <Label
             Grid.Row="0"
             Text="My Bookings"
             FontSize="28"
             FontAttributes="Bold"
-            TextColor="#0F4C81" />
+            TextColor="#0F4C81"/>
 
+
+
+        <!-- Booking List -->
         <Frame
             Grid.Row="1"
             BackgroundColor="White"
             CornerRadius="16"
             HasShadow="False"
             BorderColor="#D8E2EC"
-            Padding="20">
+            Padding="15">
 
-            <Grid RowDefinitions="*,Auto"
-                  RowSpacing="15">
 
-                <ScrollView Grid.Row="0">
+            <CollectionView
+                ItemsSource="{Binding Bookings}"
+                SelectedItem="{Binding SelectedBooking}"
+                SelectionMode="Single">
 
-                    <VerticalStackLayout Spacing="12">
 
-                        <!-- This must be connected to the actual booking data, for now, we will use placeholders, edit if must-->
-                        <!-- I think you need to be able to press on a booking to see the details of that booking, so maybe make the frames clickable and navigate to a new page with the booking details-->
-                        <!-- Booking 1 -->
+                <CollectionView.EmptyView>
+
+                    <Label
+                        Text="No bookings found."
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        TextColor="Gray"/>
+
+                </CollectionView.EmptyView>
+
+
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
+
+
                         <Frame
+                            Margin="0,5"
+                            Padding="15"
                             BackgroundColor="#EAF2F8"
                             CornerRadius="12"
                             BorderColor="#D8E2EC"
-                            HasShadow="False"
-                            HeightRequest="80">
+                            HasShadow="False">
 
-                            <Label
-                                Text="Booking 1"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                FontAttributes="Bold"
-                                FontSize="16"
-                                TextColor="#0F4C81"/>
+
+                            <Grid
+                                RowDefinitions="Auto,Auto,Auto,Auto"
+                                ColumnDefinitions="*,Auto"
+                                RowSpacing="8">
+
+
+
+                                <!-- Room -->
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Text="{Binding Room.RoomNum, StringFormat='Room {0}'}"
+                                    FontSize="18"
+                                    FontAttributes="Bold"
+                                    TextColor="#0F4C81"/>
+
+
+
+                                <!-- Status -->
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Text="{Binding BookingStatus}"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="End"
+                                    TextColor="{Binding BookingStatus, 
+                                        Converter={StaticResource BookingStatusColorConverter}}"/>
+
+
+
+
+
+                                <!-- Room Type -->
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Text="{Binding Room.RoomType.RoomTypeName,
+                                           StringFormat='Type: {0}'}"
+                                    TextColor="#444"/>
+
+
+
+
+
+                                <!-- Dates -->
+                                <VerticalStackLayout
+                                    Grid.Row="2"
+                                    Grid.ColumnSpan="2"
+                                    Spacing="3">
+
+
+                                    <Label
+                                        Text="{Binding CheckIn,
+                                            StringFormat='Check-in: {0:MMMM dd, yyyy}'}"
+                                        TextColor="#444"/>
+
+
+                                    <Label
+                                        Text="{Binding CheckOut,
+                                            StringFormat='Check-out: {0:MMMM dd, yyyy}'}"
+                                        TextColor="#444"/>
+
+
+                                </VerticalStackLayout>
+
+
+
+
+
+
+                                <!-- Guests and Cost -->
+                                <VerticalStackLayout
+                                    Grid.Row="3"
+                                    Grid.ColumnSpan="2"
+                                    Spacing="3">
+
+
+                                    <Label
+                                        Text="{Binding NumberOfGuests,
+                                            StringFormat='Guests: {0}'}"
+                                        TextColor="#444"/>
+
+
+                                    <Label
+                                        Text="{Binding TotalCost,
+                                            StringFormat='Total: ₱{0:N2}'}"
+                                        FontAttributes="Bold"
+                                        TextColor="#0F4C81"/>
+
+
+                                </VerticalStackLayout>
+
+
+
+                            </Grid>
+
+
                         </Frame>
 
-                        <!-- Booking 2 -->
-                        <Frame
-                            BackgroundColor="#EAF2F8"
-                            CornerRadius="12"
-                            BorderColor="#D8E2EC"
-                            HasShadow="False"
-                            HeightRequest="80">
 
-                            <Label
-                                Text="Booking 2"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                FontAttributes="Bold"
-                                FontSize="16"
-                                TextColor="#0F4C81"/>
-                        </Frame>
+                    </DataTemplate>
 
-                        <!-- Booking 3 -->
-                        <Frame
-                            BackgroundColor="#EAF2F8"
-                            CornerRadius="12"
-                            BorderColor="#D8E2EC"
-                            HasShadow="False"
-                            HeightRequest="80">
 
-                            <Label
-                                Text="Booking 3"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                FontAttributes="Bold"
-                                FontSize="16"
-                                TextColor="#0F4C81"/>
-                        </Frame>
+                </CollectionView.ItemTemplate>
 
-                    </VerticalStackLayout>
 
-                </ScrollView>
+            </CollectionView>
 
-                <Grid
-                    Grid.Row="1"
-                    ColumnDefinitions="*,*"
-                    ColumnSpacing="10">
-
-                    <Button
-                        Grid.Column="0"
-                        Text="Continue to Payment"
-                        BackgroundColor="#0F4C81"
-                        TextColor="White"
-                        CornerRadius="10"
-                        HeightRequest="50"/>
-
-                    <Button
-                        Grid.Column="1"
-                        Text="Cancel Booking"
-                        BackgroundColor="#EAF2F8"
-                        TextColor="#0F4C81"
-                        BorderColor="#0F4C81"
-                        BorderWidth="1"
-                        CornerRadius="10"
-                        HeightRequest="50"/>
-
-                </Grid>
-
-            </Grid>
 
         </Frame>
-        
-        <Frame
+
+
+
+
+
+        <!-- Bottom Buttons -->
+        <Grid
             Grid.Row="2"
-            BackgroundColor="#EAF2F8"
-            CornerRadius="16"
-            HasShadow="False"
-            Padding="12">
+            ColumnDefinitions="*,*"
+            ColumnSpacing="10">
 
-            <Grid ColumnDefinitions="*,*,*,*"
-                  ColumnSpacing="10">
 
-                <Button
-                    Grid.Column="0"
-                    Text="Book&#10;Room"
-                    HeightRequest="55"
-                    CornerRadius="10"
-                    BackgroundColor="White"
-                    TextColor="#0F4C81"
-                    FontSize="12"/>
+            <Button
+                Grid.Column="0"
+                Text="Continue to Payment"
+                Clicked="ContinuePayment_Clicked"
+                BackgroundColor="#0F4C81"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="50"/>
 
-                <Button
-                    Grid.Column="1"
-                    Text="My&#10;Bookings"
-                    HeightRequest="55"
-                    CornerRadius="10"
-                    BackgroundColor="#0F4C81"
-                    TextColor="White"
-                    FontSize="12"/>
 
-                <Button
-                    Grid.Column="2"
-                    Text="Home"
-                    HeightRequest="55"
-                    CornerRadius="10"
-                    BackgroundColor="White"
-                    TextColor="#0F4C81"
-                    FontSize="12"/>
 
-                <Button
-                    Grid.Column="3"
-                    Text="Profile"
-                    HeightRequest="55"
-                    CornerRadius="10"
-                    BackgroundColor="White"
-                    TextColor="#0F4C81"
-                    FontSize="12"/>
+            <Button
+                Grid.Column="1"
+                Text="Cancel Booking"
+                Clicked="CancelBooking_Clicked"
+                BackgroundColor="#EAF2F8"
+                TextColor="#0F4C81"
+                BorderColor="#0F4C81"
+                BorderWidth="1"
+                CornerRadius="10"
+                HeightRequest="50"/>
 
-            </Grid>
 
-        </Frame>
+        </Grid>
+
+
 
     </Grid>
+
 
 </ContentPage>

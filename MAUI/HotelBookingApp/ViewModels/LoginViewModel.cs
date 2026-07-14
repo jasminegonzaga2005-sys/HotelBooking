@@ -11,14 +11,16 @@ namespace HotelBookingApp.ViewModels
     public partial class LoginViewModel: BaseViewModel
     {
         private readonly ApiService _apiService;
+        private readonly DashboardPage _dashboardPage;
 
         private string _email;
         private string _password;
         private bool _isBusy;
 
-        public LoginViewModel(ApiService apiService)
+        public LoginViewModel(ApiService apiService, DashboardPage dashboardPage)
         {
             _apiService = apiService;
+            _dashboardPage = dashboardPage;
             LoginCommand = new Command(async () => await LoginAsync());
         }
 
@@ -59,7 +61,7 @@ namespace HotelBookingApp.ViewModels
                     App.CurrentUser = customer;
 
                     // Navigate to Dashboard
-                    await Application.Current.MainPage.Navigation.PushAsync(new DashboardPage());
+                    await Application.Current.MainPage.Navigation.PushAsync(_dashboardPage);
                 }
                 else
                 {

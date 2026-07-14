@@ -61,6 +61,74 @@ namespace HotelBookingApp.Services
         }
 
         //rooms endpoints
+        public async Task<List<Room>?> GetAvailableRooms()
+        {
+            Console.WriteLine("Fetching Available Rooms");
+
+            try
+            {
+                var url = "api/Rooms?status=Available";
+                var response = await _httpClient.GetAsync(url);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine($"Request failed: {response.StatusCode}");
+                    return null;
+                }
+
+                var rooms = await response.Content.ReadFromJsonAsync<List<Room>>();
+
+                Console.WriteLine($"Retrieved {rooms?.Count ?? 0} available rooms.");
+
+                return rooms;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching rooms: {ex.Message}");
+                return new List<Room>();
+            }
+        }
+
+        
+        public async Task<bool> UpdateRoomStatus(string status, int id)
+        {
+            Console.WriteLine($"Updating room {id} status to {status}");
+
+            try
+            {
+                var requestBody = new
+                {
+                    roomStatus = status
+                };
+
+
+                var response = await _httpClient.PatchAsJsonAsync(
+                    $"api/Rooms/{id}",
+                    requestBody
+                );
+
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Room status updated successfully.");
+                    return true;
+                }
+
+
+                var error = await response.Content.ReadAsStringAsync();
+
+                Console.WriteLine($"Update room failed: {error}");
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Update room status error: {ex.Message}");
+
+                return false;
+            }
+        }
+
         public async Task<List<Room>> GetRoomsAsync()
         {
             return await _httpClient.GetFromJsonAsync<List<Room>>("api/Rooms");
@@ -78,16 +146,91 @@ namespace HotelBookingApp.Services
         }
 
         //booking endpoints
-        public async Task<List<Booking>> GetBookingsAsync(int id)
+        public async Task<bool> CreateBooking(Booking booking)
         {
-            return await _httpClient.GetFromJsonAsync<List<Booking>>($"api/Booking/customer/{id}");
+            Console.WriteLine("Creating booking...");
+
+            try
+            {
+                var requestBody = new
+                {
+                    customerID = booking.CustomerID,
+                    roomID = booking.RoomID,
+                    checkIn = booking.CheckIn.ToString("yyyy-MM-dd"),
+                    checkOut = booking.CheckOut.ToString("yyyy-MM-dd"),
+                    numberOfGuests = booking.NumberOfGuests
+                };
+
+
+                var response = await _httpClient.PostAsJsonAsync(
+                    "api/Booking",
+                    requestBody
+                );
+
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Booking created successfully.");
+                    return true;
+                }
+
+
+                var error = await response.Content.ReadAsStringAsync();
+
+                Console.WriteLine($"Booking failed: {error}");
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Create booking error: {ex.Message}");
+                return false;
+            }
         }
 
-        public async Task<Booking> CreateBookingAsync(Booking booking)
+        public async Task<List<Booking>> GetBookings(int id)
         {
-            var response = await _httpClient.PostAsJsonAsync("api/Booking", booking);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<Booking>();
+            try
+            {
+                Console.WriteLine($"Fetching bookings for customer ID: {id}");
+
+                var url = $"api/Booking/customer/{id}";
+
+                var response = await _httpClient.GetAsync(url);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine(
+                        $"Failed to get bookings. Status: {response.StatusCode}"
+                    );
+
+                    return new List<Booking>();
+                }
+
+
+                var bookings = await response.Content.ReadFromJsonAsync<List<Booking>>();
+
+                if (bookings == null)
+                {
+                    return new List<Booking>();
+                }
+
+
+                Console.WriteLine(
+                    $"Loaded {bookings.Count} bookings"
+                );
+
+                return bookings;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(
+                    $"Get bookings error: {ex.Message}"
+                );
+
+                return new List<Booking>();
+            }
         }
+
     }
 }

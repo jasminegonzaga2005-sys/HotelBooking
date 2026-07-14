@@ -2,6 +2,7 @@
 using HotelBookingApp.ViewModels;
 using HotelBookingApp.Views;
 using Microsoft.Extensions.Logging;
+using HotelBookingApp.Views.Rooms;
 
 namespace HotelBookingApp
 {
@@ -26,10 +27,25 @@ namespace HotelBookingApp
 
             // ViewModels
             builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<DashboardViewModel>();
+            builder.Services.AddTransient<BookRoomViewModel>();
+            builder.Services.AddTransient<MyBookingsViewModel>();
 
             // Pages
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<DashboardPage>();
+            builder.Services.AddTransient<StandardRoomPage>();
+            builder.Services.AddTransient<SuperiorRoomPage>();
+            builder.Services.AddTransient<DeluxeRoomPage>();
+            builder.Services.AddTransient<FamilyRoomPage>();
+            builder.Services.AddTransient<ExecutiveSuitePage>();
+            builder.Services.AddTransient<BookRoomPage>();
+            builder.Services.AddTransient<MyBookingsPage>();
+            builder.Services.AddTransient<ProfilePage>();
+            builder.Services.AddTransient<PaymentPage>();
+            builder.Services.AddTransient<BookRoomPage>();
+            builder.Services.AddTransient<MyBookingsViewModel>();
+
 
             // App
             builder.Services.AddSingleton<App>();

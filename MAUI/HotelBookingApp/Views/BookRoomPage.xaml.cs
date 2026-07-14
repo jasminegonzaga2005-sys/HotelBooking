@@ -1,18 +1,20 @@
-using System;
+using HotelBookingApp.ViewModels;
 
 namespace HotelBookingApp.Views;
 
 public partial class BookRoomPage : ContentPage
 {
-    public BookRoomPage()
+    private readonly MyBookingsPage _myBookingsPage;
+    public BookRoomPage(BookRoomViewModel viewModel, MyBookingsPage myBookingsPage)
     {
         InitializeComponent();
+
+        BindingContext = viewModel;
+        _myBookingsPage = myBookingsPage;
     }
 
-    private async void BookNow_Clicked(object sender, EventArgs e)
+    private async void MyBookings_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Booking", "Booking feature is under development.", "OK");
-
-        // await Navigation.PushAsync(new PaymentPage());
+        await Navigation.PushAsync(_myBookingsPage);
     }
 }
