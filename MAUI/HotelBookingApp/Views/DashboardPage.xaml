@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HotelBookingApp.Views.DashboardPage"
+    Title="Dashboard"
+    BackgroundColor="#F5F7FA">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="20">
+
+            <!-- Title -->
+            <Label
+                Text="Homepage"
+                FontSize="28"
+                FontAttributes="Bold"
+                TextColor="#0F4C81"/>
+
+            <!-- Welcome -->
+            <Frame
+                BackgroundColor="#EAF2F8"
+                CornerRadius="16"
+                Padding="20"
+                HasShadow="False">
+
+                <VerticalStackLayout
+                    HorizontalOptions="Center"
+                    Spacing="5">
+
+                    <Label
+                        Text="Welcome, User!"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        TextColor="#0F4C81"
+                        HorizontalOptions="Center"/>
+
+                    <Label
+                        Text="Find the perfect room for your stay."
+                        FontSize="14"
+                        TextColor="#5F6C7B"
+                        HorizontalOptions="Center"/>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <!-- Room Types -->
+            <Frame
+                BackgroundColor="#EAF2F8"
+                CornerRadius="16"
+                Padding="20"
+                HasShadow="False">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label
+                        Text="Available Room Types"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="#0F4C81"/>
+
+                    <Label
+                        Text="Choose a room that best suits your stay."
+                        FontSize="13"
+                        TextColor="#6E7C89"/>
+
+                    <Button
+                        Text="Standard Room"
+                        Clicked="StandardRoom_Clicked"/>
+
+                    <Button
+                        Text="Superior Room"
+                        Clicked="SuperiorRoom_Clicked"/>
+
+                    <Button
+                        Text="Deluxe Room"
+                        Clicked="DeluxeRoom_Clicked"/>
+
+                    <Button
+                        Text="Family Room"
+                        Clicked="FamilyRoom_Clicked"/>
+
+                    <Button
+                        Text="Executive Suite"
+                        Clicked="ExecutiveSuite_Clicked"/>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+            <!-- Navigation -->
+            <Frame
+                BackgroundColor="#EAF2F8"
+                CornerRadius="16"
+                Padding="15"
+                HasShadow="False">
+
+                <Grid
+                    ColumnDefinitions="*,*,*,*"
+                    ColumnSpacing="10">
+
+                    <Button
+                        Grid.Column="0"
+                        Text="Book&#10;Room"
+                        Clicked="BookRoom_Clicked"/>
+
+                    <Button
+                        Grid.Column="1"
+                        Text="My&#10;Bookings"
+                        Clicked="MyBookings_Clicked"/>
+
+                    <Button
+                        Grid.Column="2"
+                        Text="Home"
+                        Clicked="Home_Clicked"/>
+
+                    <Button
+                        Grid.Column="3"
+                        Text="Profile"
+                        Clicked="Profile_Clicked"/>
+
+                </Grid>
+
+            </Frame>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>
