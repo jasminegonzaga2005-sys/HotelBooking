@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HotelBookingApp.Views.BookRoomPage"
+    Title="Book a Room"
+    BackgroundColor="#F5F7FA">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView>
+
+            <VerticalStackLayout
+                Padding="20"
+                Spacing="20">
+
+                <Label
+                    Text="Book a Room"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="#0F4C81"/>
+
+                <Frame
+                    BackgroundColor="White"
+                    CornerRadius="15"
+                    HasShadow="False">
+
+                    <VerticalStackLayout
+                        Spacing="15">
+
+                        <Label
+                            Text="Select a Room"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="#0F4C81"/>
+
+                        <Picker Title="Choose Room">
+                            <Picker.Items>
+                                <x:String>Standard Room</x:String>
+                                <x:String>Superior Room</x:String>
+                                <x:String>Deluxe Room</x:String>
+                                <x:String>Family Room</x:String>
+                                <x:String>Executive Suite</x:String>
+                            </Picker.Items>
+                        </Picker>
+
+                    </VerticalStackLayout>
+
+                </Frame>
+
+                <Frame
+                    BackgroundColor="White"
+                    CornerRadius="15"
+                    HasShadow="False">
+
+                    <VerticalStackLayout
+                        Spacing="15">
+
+                        <Label
+                            Text="Booking Details"
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="#0F4C81"/>
+
+                        <Label
+                            Text="Check-in Date"
+                            FontAttributes="Bold"/>
+
+                        <DatePicker/>
+
+                        <Label
+                            Text="Check-out Date"
+                            FontAttributes="Bold"/>
+
+                        <DatePicker/>
+
+                        <Label
+                            Text="Guests"
+                            FontAttributes="Bold"/>
+
+                        <Entry
+                            Placeholder="Enter number of guests"
+                            Keyboard="Numeric"/>
+                        <!--may validation dapat to ensure that the number of guests does not exceed the room capacity-->
+
+                    </VerticalStackLayout>
+
+                </Frame>
+
+                <Button
+                    Text="Book Now"
+                    HeightRequest="50"
+                    CornerRadius="10"
+                    BackgroundColor="#0F4C81"
+                    TextColor="White"
+                    Clicked="BookNow_Clicked"/>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <Frame
+            Grid.Row="1"
+            BackgroundColor="#EAF2F8"
+            CornerRadius="16"
+            Padding="15"
+            HasShadow="False">
+
+            <Grid
+                ColumnDefinitions="*,*,*,*"
+                ColumnSpacing="10">
+
+                <Button
+                    Grid.Column="0"
+                    Text="Book&#10;Room"
+                    HeightRequest="60"
+                    BackgroundColor="#0F4C81"
+                    TextColor="White"/>
+
+                <Button
+                    Grid.Column="1"
+                    Text="My&#10;Bookings"
+                    HeightRequest="60"/>
+
+                <Button
+                    Grid.Column="2"
+                    Text="Home"
+                    HeightRequest="60"/>
+
+                <Button
+                    Grid.Column="3"
+                    Text="Profile"
+                    HeightRequest="60"/>
+
+            </Grid>
+
+        </Frame>
+
+    </Grid>
+
+</ContentPage>

@@ -49,13 +49,10 @@
                                     TextColor="#0F4C81"/>
 
                                 <Label Text="Room: Standard Room"/>
-                                <!--need to be able to choose the room type-->
                                 <Label Text="Check-in: --/--/----"/>
-                                <!--need to be able to type or choose date-->
                                 <Label Text="Check-out: --/--/----"/>
-                                <!--need to be able to type or choose date-->
                                 <Label Text="Guests: 2"/>
-                                <!--need to be able to match the allowed number of guests for the room type-->
+                                <!--need to be able to reflect the actual booking summary based on user input from previous pages-->
 
                             </VerticalStackLayout>
 

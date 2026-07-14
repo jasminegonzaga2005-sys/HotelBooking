@@ -16,9 +16,7 @@ public partial class DashboardPage : ContentPage
     private async void BookRoom_Clicked(object sender, EventArgs e)
     {
         await DisplayAlert("Book Room", "This page is under development.", "OK");
-
-        // Later:
-        // await Navigation.PushAsync(new BookARoomPage());
+        // await Navigation.PushAsync(new BookRoomPage());
     }
 
     private async void MyBookings_Clicked(object sender, EventArgs e)
