@@ -8,7 +8,7 @@
 
     <Grid RowDefinitions="*,Auto">
 
-        <ScrollView>
+        <ScrollView Grid.Row="0">
 
             <VerticalStackLayout
                 Padding="20"
@@ -20,13 +20,16 @@
                     FontAttributes="Bold"
                     TextColor="#0F4C81"/>
 
+
                 <Frame
                     BackgroundColor="White"
                     CornerRadius="15"
-                    HasShadow="False">
+                    HasShadow="False"
+                    Padding="20">
 
                     <VerticalStackLayout
                         Spacing="15">
+
 
                         <Label
                             Text="Booking Summary"
@@ -34,13 +37,18 @@
                             FontAttributes="Bold"
                             TextColor="#0F4C81"/>
 
+
+
                         <Frame
                             BackgroundColor="#EAF2F8"
                             CornerRadius="12"
-                            HasShadow="False">
+                            HasShadow="False"
+                            Padding="15">
+
 
                             <VerticalStackLayout
-                                Spacing="6">
+                                Spacing="8">
+
 
                                 <Label
                                     Text="CURRENT SUMMARY"
@@ -48,19 +56,43 @@
                                     FontSize="12"
                                     TextColor="#0F4C81"/>
 
-                                <Label Text="Room: Standard Room"/>
-                                <Label Text="Check-in: --/--/----"/>
-                                <Label Text="Check-out: --/--/----"/>
-                                <Label Text="Guests: 2"/>
-                                <!--need to be able to reflect the actual booking summary based on user input from previous pages-->
+
+                                <Label
+                                    x:Name="RoomLabel"
+                                    Text="Room:"
+                                    TextColor="#444"/>
+
+
+                                <Label
+                                    x:Name="CheckInLabel"
+                                    Text="Check-in:"
+                                    TextColor="#444"/>
+
+
+                                <Label
+                                    x:Name="CheckOutLabel"
+                                    Text="Check-out:"
+                                    TextColor="#444"/>
+
+
+                                <Label
+                                    x:Name="GuestsLabel"
+                                    Text="Guests:"
+                                    TextColor="#444"/>
+
 
                             </VerticalStackLayout>
 
+
                         </Frame>
+
+
 
                         <BoxView
                             HeightRequest="1"
                             BackgroundColor="LightGray"/>
+
+
 
                         <Label
                             Text="TOTAL AMOUNT"
@@ -68,17 +100,21 @@
                             FontAttributes="Bold"
                             TextColor="#0F4C81"/>
 
+
                         <Label
-                            Text="₱0.00" 
+                            x:Name="TotalLabel"
+                            Text="₱0.00"
                             FontSize="28"
                             FontAttributes="Bold"
                             HorizontalOptions="Center"
                             TextColor="#0F4C81"/>
-                        <!-- need to be able to calculate total amount based on room type, number of nights -->
+
+
 
                         <Grid
                             ColumnDefinitions="*,*"
                             ColumnSpacing="10">
+
 
                             <Button
                                 Grid.Column="0"
@@ -89,6 +125,7 @@
                                 CornerRadius="10"
                                 Clicked="Pay_Clicked"/>
 
+
                             <Button
                                 Grid.Column="1"
                                 Text="Cancel"
@@ -98,15 +135,22 @@
                                 CornerRadius="10"
                                 Clicked="Cancel_Clicked"/>
 
+
                         </Grid>
+
 
                     </VerticalStackLayout>
 
+
                 </Frame>
+
 
             </VerticalStackLayout>
 
+
         </ScrollView>
+
+
 
         <Frame
             Grid.Row="1"
@@ -115,34 +159,43 @@
             Padding="15"
             HasShadow="False">
 
+
             <Grid
                 ColumnDefinitions="*,*,*,*"
                 ColumnSpacing="10">
+
 
                 <Button
                     Grid.Column="0"
                     Text="Book&#10;Room"
                     HeightRequest="60"/>
 
+
                 <Button
                     Grid.Column="1"
                     Text="My&#10;Bookings"
                     HeightRequest="60"/>
+
 
                 <Button
                     Grid.Column="2"
                     Text="Home"
                     HeightRequest="60"/>
 
+
                 <Button
                     Grid.Column="3"
                     Text="Profile"
                     HeightRequest="60"/>
 
+
             </Grid>
+
 
         </Frame>
 
+
     </Grid>
+
 
 </ContentPage>

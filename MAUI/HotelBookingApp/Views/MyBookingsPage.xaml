@@ -19,9 +19,10 @@
 
 
 
-    <Grid RowDefinitions="Auto,*,Auto"
-          Padding="20"
-          RowSpacing="15">
+    <Grid
+        RowDefinitions="Auto,*,Auto"
+        Padding="20"
+        RowSpacing="15">
 
 
         <!-- Title -->
@@ -35,13 +36,18 @@
 
 
         <!-- Booking List -->
-        <Frame
+        <Border
             Grid.Row="1"
             BackgroundColor="White"
-            CornerRadius="16"
-            HasShadow="False"
-            BorderColor="#D8E2EC"
+            Stroke="#D8E2EC"
+            StrokeThickness="1"
             Padding="15">
+
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="16"/>
+            </Border.StrokeShape>
+
 
 
             <CollectionView
@@ -67,13 +73,76 @@
                     <DataTemplate>
 
 
-                        <Frame
+                        <Border
                             Margin="0,5"
                             Padding="15"
                             BackgroundColor="#EAF2F8"
-                            CornerRadius="12"
-                            BorderColor="#D8E2EC"
-                            HasShadow="False">
+                            Stroke="#D8E2EC"
+                            StrokeThickness="1">
+
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12"/>
+                            </Border.StrokeShape>
+
+
+
+                            <VisualStateManager.VisualStateGroups>
+
+                                <VisualStateGroup Name="CommonStates">
+
+
+                                    <VisualState Name="Normal">
+
+                                        <VisualState.Setters>
+
+                                            <Setter
+                                                Property="Stroke"
+                                                Value="#D8E2EC"/>
+
+                                            <Setter
+                                                Property="StrokeThickness"
+                                                Value="1"/>
+
+                                            <Setter
+                                                Property="BackgroundColor"
+                                                Value="#EAF2F8"/>
+
+                                        </VisualState.Setters>
+
+                                    </VisualState>
+
+
+
+
+                                    <VisualState Name="Selected">
+
+                                        <VisualState.Setters>
+
+                                            <Setter
+                                                Property="Stroke"
+                                                Value="#0F4C81"/>
+
+                                            <Setter
+                                                Property="StrokeThickness"
+                                                Value="3"/>
+
+                                            <Setter
+                                                Property="BackgroundColor"
+                                                Value="#D6EAF8"/>
+
+                                        </VisualState.Setters>
+
+                                    </VisualState>
+
+
+                                </VisualStateGroup>
+
+
+                            </VisualStateManager.VisualStateGroups>
+
+
+
 
 
                             <Grid
@@ -87,10 +156,12 @@
                                 <Label
                                     Grid.Row="0"
                                     Grid.Column="0"
-                                    Text="{Binding Room.RoomNum, StringFormat='Room {0}'}"
+                                    Text="{Binding Room.RoomNum,
+                                    StringFormat='Room {0}'}"
                                     FontSize="18"
                                     FontAttributes="Bold"
                                     TextColor="#0F4C81"/>
+
 
 
 
@@ -101,9 +172,8 @@
                                     Text="{Binding BookingStatus}"
                                     FontAttributes="Bold"
                                     HorizontalOptions="End"
-                                    TextColor="{Binding BookingStatus, 
-                                        Converter={StaticResource BookingStatusColorConverter}}"/>
-
+                                    TextColor="{Binding BookingStatus,
+                                    Converter={StaticResource BookingStatusColorConverter}}"/>
 
 
 
@@ -113,7 +183,7 @@
                                     Grid.Row="1"
                                     Grid.Column="0"
                                     Text="{Binding Room.RoomType.RoomTypeName,
-                                           StringFormat='Type: {0}'}"
+                                    StringFormat='Type: {0}'}"
                                     TextColor="#444"/>
 
 
@@ -129,18 +199,17 @@
 
                                     <Label
                                         Text="{Binding CheckIn,
-                                            StringFormat='Check-in: {0:MMMM dd, yyyy}'}"
+                                        StringFormat='Check-in: {0:MMMM dd, yyyy}'}"
                                         TextColor="#444"/>
 
 
                                     <Label
                                         Text="{Binding CheckOut,
-                                            StringFormat='Check-out: {0:MMMM dd, yyyy}'}"
+                                        StringFormat='Check-out: {0:MMMM dd, yyyy}'}"
                                         TextColor="#444"/>
 
 
                                 </VerticalStackLayout>
-
 
 
 
@@ -155,13 +224,13 @@
 
                                     <Label
                                         Text="{Binding NumberOfGuests,
-                                            StringFormat='Guests: {0}'}"
+                                        StringFormat='Guests: {0}'}"
                                         TextColor="#444"/>
 
 
                                     <Label
                                         Text="{Binding TotalCost,
-                                            StringFormat='Total: ₱{0:N2}'}"
+                                        StringFormat='Total: ₱{0:N2}'}"
                                         FontAttributes="Bold"
                                         TextColor="#0F4C81"/>
 
@@ -169,11 +238,10 @@
                                 </VerticalStackLayout>
 
 
-
                             </Grid>
 
 
-                        </Frame>
+                        </Border>
 
 
                     </DataTemplate>
@@ -185,7 +253,8 @@
             </CollectionView>
 
 
-        </Frame>
+        </Border>
+
 
 
 
@@ -209,6 +278,7 @@
 
 
 
+
             <Button
                 Grid.Column="1"
                 Text="Cancel Booking"
@@ -222,7 +292,6 @@
 
 
         </Grid>
-
 
 
     </Grid>

@@ -232,5 +232,50 @@ namespace HotelBookingApp.Services
             }
         }
 
+        public async Task<bool> UpdateBookingStatus(string status, int id)
+        {
+            try
+            {
+                var url = $"api/Booking/{id}/status";
+
+
+                var request = new
+                {
+                    bookingStatus = status
+                };
+
+
+                var response = await _httpClient.PatchAsJsonAsync(
+                    url,
+                    request
+                );
+
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine(
+                        $"Booking {id} status updated to {status}"
+                    );
+
+                    return true;
+                }
+
+
+                Console.WriteLine(
+                    $"Failed updating booking status. Status code: {response.StatusCode}"
+                );
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(
+                    $"Update booking status error: {ex.Message}"
+                );
+
+                return false;
+            }
+        }
+
     }
 }

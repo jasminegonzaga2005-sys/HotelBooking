@@ -29,7 +29,22 @@ namespace HotelBookingApp.ViewModels
             LoadBookings();
         }
 
+        public async Task<bool> UpdateBookingStatus(string status,int bookingId)
+        {
+            return await _apiService.UpdateBookingStatus(
+                status,
+                bookingId
+            );
 
+        }
+
+        public async Task<bool> UpdateRoomStatus(string status, int roomId)
+        {
+            return await _apiService.UpdateRoomStatus(
+                status,
+                roomId
+            );
+        }
 
         public async Task LoadBookings()
         {

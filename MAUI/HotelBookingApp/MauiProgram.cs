@@ -30,6 +30,7 @@ namespace HotelBookingApp
             builder.Services.AddTransient<DashboardViewModel>();
             builder.Services.AddTransient<BookRoomViewModel>();
             builder.Services.AddTransient<MyBookingsViewModel>();
+            builder.Services.AddTransient<PaymentViewModel>();
 
             // Pages
             builder.Services.AddTransient<LoginPage>();
@@ -44,7 +45,6 @@ namespace HotelBookingApp
             builder.Services.AddTransient<ProfilePage>();
             builder.Services.AddTransient<PaymentPage>();
             builder.Services.AddTransient<BookRoomPage>();
-            builder.Services.AddTransient<MyBookingsViewModel>();
 
 
             // App
