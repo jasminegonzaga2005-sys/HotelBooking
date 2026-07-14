@@ -1,10 +1,7 @@
-﻿using System;
-using HotelBookingApp.Services;
-using Microsoft.Extensions.Logging;
+﻿using HotelBookingApp.Services;
 using HotelBookingApp.ViewModels;
-//using Microsoft.Extensions.Http;
-
-
+using HotelBookingApp.Views;
+using Microsoft.Extensions.Logging;
 
 namespace HotelBookingApp
 {
@@ -13,6 +10,7 @@ namespace HotelBookingApp
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
@@ -21,17 +19,23 @@ namespace HotelBookingApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
             builder.Services.AddHttpClient<ApiService>(client =>
             {
-                //client.BaseAddress = new Uri("http://10.0.2.2:5226/");
-                client.BaseAddress = new Uri("https://localhost:7068/");
+                client.BaseAddress = new Uri("http://192.168.68.132:5226/");
             });
 
+            // ViewModels
             builder.Services.AddTransient<LoginViewModel>();
-            builder.Logging.AddDebug();
 
-            
+            // Pages
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<DashboardPage>();
+
+            // App
+            builder.Services.AddSingleton<App>();
+
+#if DEBUG
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

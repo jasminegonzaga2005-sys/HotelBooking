@@ -36,14 +36,28 @@ namespace HotelBookingApp.Services
         //added this 
         public async Task<Customer?> LoginAsync(string email, string password)
         {
-            var response = await _httpClient.GetAsync($"api/Customer?email={email}&password={password}");
-
-            if (response.IsSuccessStatusCode)
+            Console.WriteLine("Fetching Customer info");
+            try
             {
-                return await response.Content.ReadFromJsonAsync<Customer>();
-            }
+                var url = $"api/Customer?email={Uri.EscapeDataString(email)}&password={Uri.EscapeDataString(password)}";
 
-            return null; // login failed
+                var response = await _httpClient.GetAsync(url);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return null;
+                }
+
+                var customer = await response.Content.ReadFromJsonAsync<Customer>();
+
+                Console.WriteLine($"Custmer{customer}");
+                return customer;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Login error: {ex.Message}");
+                return null;
+            }
         }
 
         //rooms endpoints

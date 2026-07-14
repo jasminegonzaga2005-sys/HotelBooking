@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using HotelBookingApp.Services;
 using HotelBookingApp.Models;
+using HotelBookingApp.Views;
 
 namespace HotelBookingApp.ViewModels
 {
@@ -58,7 +59,7 @@ namespace HotelBookingApp.ViewModels
                     App.CurrentUser = customer;
 
                     // Navigate to Dashboard
-                    await Shell.Current.GoToAsync("//DashboardPage");
+                    await Application.Current.MainPage.Navigation.PushAsync(new DashboardPage());
                 }
                 else
                 {
