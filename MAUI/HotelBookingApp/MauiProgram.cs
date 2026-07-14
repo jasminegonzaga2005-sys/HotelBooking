@@ -1,6 +1,7 @@
 ﻿using System;
 using HotelBookingApp.Services;
 using Microsoft.Extensions.Logging;
+using HotelBookingApp.ViewModels;
 //using Microsoft.Extensions.Http;
 
 
@@ -26,7 +27,10 @@ namespace HotelBookingApp
                 client.BaseAddress = new Uri("http://10.0.2.2:7068/");
             });
 
-    		builder.Logging.AddDebug();
+            builder.Services.AddTransient<LoginViewModel>();
+            builder.Logging.AddDebug();
+
+            
 #endif
 
             return builder.Build();

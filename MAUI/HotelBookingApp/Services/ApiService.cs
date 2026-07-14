@@ -17,6 +17,7 @@ namespace HotelBookingApp.Services
         public ApiService(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            
         }
 
         //customer endpoints
@@ -30,6 +31,19 @@ namespace HotelBookingApp.Services
             var response = await _httpClient.PostAsJsonAsync("api/Customer", customer);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<Customer>();
+        }
+
+        //added this 
+        public async Task<Customer?> LoginAsync(string email, string password)
+        {
+            var response = await _httpClient.GetAsync($"api/Customer?email={email}&password={password}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<Customer>();
+            }
+
+            return null; // login failed
         }
 
         //rooms endpoints
