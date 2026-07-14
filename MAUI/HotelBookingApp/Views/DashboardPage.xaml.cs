@@ -23,41 +23,41 @@ public partial class DashboardPage : ContentPage
 
     private async void MyBookings_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("My Bookings", "This page is under development.", "OK");
+        await DisplayAlert("My Bookings", "This page is under development.", "OK"); //To be edit for navigation 
     }
 
     private async void Home_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Home", "You are already on the Homepage.", "OK");
+        await DisplayAlert("Home", "You are already on the Homepage.", "OK"); 
     }
 
     private async void Profile_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Profile", "This page is under development.", "OK");
+        await DisplayAlert("Profile", "This page is under development.", "OK"); //To be edit for navigation 
     }
 
     private async void StandardRoom_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Standard Room", "Room details will be shown here.", "OK");
+        await DisplayAlert("Standard Room", "Room details will be shown here.", "OK"); //To be edit for navigation to StandardRoomPage
     }
 
     private async void SuperiorRoom_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Superior Room", "Room details will be shown here.", "OK");
+        await DisplayAlert("Superior Room", "Room details will be shown here.", "OK"); //To be edit for navigation to SuperiorRoomPage
     }
 
     private async void DeluxeRoom_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Deluxe Room", "Room details will be shown here.", "OK");
+        await DisplayAlert("Deluxe Room", "Room details will be shown here.", "OK"); //To be edit for navigation to DeluxeRoomPage
     }
 
     private async void FamilyRoom_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Family Room", "Room details will be shown here.", "OK");
+        await DisplayAlert("Family Room", "Room details will be shown here.", "OK"); //To be edit for navigation to FamilyRoomPage
     }
 
     private async void ExecutiveSuite_Clicked(object sender, EventArgs e)
     {
-        await DisplayAlert("Executive Suite", "Room details will be shown here.", "OK");
+        await DisplayAlert("Executive Suite", "Room details will be shown here.", "OK"); //To be edit for navigation to ExecutiveSuitePage
     }
 }

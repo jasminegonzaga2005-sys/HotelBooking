@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HotelBookingApp.Views.Rooms.FamilyRoomPage"
+    Title="Family Room"
+    BackgroundColor="#F5F7FA">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <ScrollView>
+
+            <VerticalStackLayout
+                Padding="20"
+                Spacing="20">
+
+                <Label
+                    Text="Family Room"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="#0F4C81"/>
+
+                <Frame
+                    HeightRequest="180"
+                    BackgroundColor="#EAF2F8"
+                    CornerRadius="15"
+                    HasShadow="False">
+
+                    <Label
+                        Text="Room Image"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        TextColor="#0F4C81"/>
+
+                </Frame>
+
+                <Frame
+                    BackgroundColor="#EAF2F8"
+                    CornerRadius="15"
+                    HasShadow="False">
+
+                    <VerticalStackLayout>
+
+                        <Label
+                            Text="Description"
+                            FontAttributes="Bold"
+                            TextColor="#0F4C81"/>
+
+                        <Label
+                            Text="Large room designed to comfortably accommodate families or groups with multiple beds and extra space."/>
+
+                    </VerticalStackLayout>
+
+                </Frame>
+
+                <Frame
+                    BackgroundColor="#EAF2F8"
+                    CornerRadius="15"
+                    HasShadow="False">
+
+                    <VerticalStackLayout
+                        Spacing="8">
+
+                        <Label
+                            Text="Amenities"
+                            FontAttributes="Bold"
+                            TextColor="#0F4C81"/>
+
+                        <Label Text="• 2 Queen Beds"/>
+                        <Label Text="• Air Conditioning"/>
+                        <Label Text="• Free Wi-Fi"/>
+                        <Label Text="• 55&quot; Smart TV"/>
+                        <Label Text="• Dining Table"/>
+                        <Label Text="• Sofa Area"/>
+                        <Label Text="• Mini Refrigerator"/>
+                        <Label Text="• Coffee Maker"/>
+                        <Label Text="• Safety Box"/>
+                        <Label Text="• Iron and Ironing Board"/>
+                        <Label Text="• Private Bathroom"/>
+                        <Label Text="• Hair Dryer"/>
+                        <Label Text="• Towels and Toiletries"/>
+                        <Label Text="• Complementary Bottled Water"/>
+                        <Label Text="• Free Breakfast (4)"/>
+
+                    </VerticalStackLayout>
+
+                </Frame>
+
+                <Label
+                    Text="₱4,500 / Night"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    TextColor="#0F4C81"/>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <Frame
+            Grid.Row="1"
+            BackgroundColor="#EAF2F8"
+            CornerRadius="16"
+            Padding="15"
+            HasShadow="False">
+
+            <Grid
+                ColumnDefinitions="*,*,*,*"
+                ColumnSpacing="10">
+
+                <Button
+                    Grid.Column="0"
+                    Text="Book&#10;Room"
+                    HeightRequest="60"/>
+
+                <Button
+                    Grid.Column="1"
+                    Text="My&#10;Bookings"
+                    HeightRequest="60"/>
+
+                <Button
+                    Grid.Column="2"
+                    Text="Home"
+                    HeightRequest="60"/>
+
+                <Button
+                    Grid.Column="3"
+                    Text="Profile"
+                    HeightRequest="60"/>
+
+            </Grid>
+
+        </Frame>
+
+    </Grid>
+
+</ContentPage>
