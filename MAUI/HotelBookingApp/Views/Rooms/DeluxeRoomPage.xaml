@@ -47,7 +47,8 @@
                             TextColor="#0F4C81"/>
 
                         <Label
-                            Text="Premium room with upgraded furnishings and additional conveniences for a relaxing stay."/>
+                            Text="Premium room with upgraded furnishings and additional conveniences for a relaxing stay."
+                            TextColor="Black"/>
 
                     </VerticalStackLayout>
 
@@ -66,19 +67,32 @@
                             FontAttributes="Bold"
                             TextColor="#0F4C81"/>
 
-                        <Label Text="• 1 King Bed / 2 Double Beds"/>
-                        <Label Text="• Air Conditioning"/>
-                        <Label Text="• Free Wi-Fi"/>
-                        <Label Text="• 50&quot; Smart TV"/>
-                        <Label Text="• Sofa Seating"/>
-                        <Label Text="• Coffee Maker"/>
-                        <Label Text="• Safety Box"/>
-                        <Label Text="• Iron and Ironing Board"/>
-                        <Label Text="• Private Bathroom"/>
-                        <Label Text="• Hair Dryer"/>
-                        <Label Text="• Towels and Toiletries"/>
-                        <Label Text="• Complementary Bottled Water"/>
-                        <Label Text="• Free Breakfast (2)"/>
+                        <Label Text="• 1 King Bed / 2 Double Beds"
+                               TextColor="Black"/>
+                        <Label Text="• Air Conditioning"
+                               TextColor="Black"/>
+                        <Label Text="• Free Wi-Fi"
+                               TextColor="Black"/>
+                        <Label Text="• 50&quot; Smart TV"
+                               TextColor="Black"/>
+                        <Label Text="• Sofa Seating"
+                               TextColor="Black"/>
+                        <Label Text="• Coffee Maker"
+                               TextColor="Black"/>
+                        <Label Text="• Safety Box"
+                               TextColor="Black"/>
+                        <Label Text="• Iron and Ironing Board"
+                               TextColor="Black"/>
+                        <Label Text="• Private Bathroom"
+                               TextColor="Black"/>
+                        <Label Text="• Hair Dryer"
+                               TextColor="Black"/>
+                        <Label Text="• Towels and Toiletries"
+                               TextColor="Black"/>
+                        <Label Text="• Complementary Bottled Water"
+                               TextColor="Black"/>
+                        <Label Text="• Free Breakfast (2)"
+                               TextColor="Black"/>
 
                     </VerticalStackLayout>
 

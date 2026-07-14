@@ -6,11 +6,21 @@ public partial class DashboardPage : ContentPage
 {
     private readonly BookRoomPage _bookroompage;
     private readonly MyBookingsPage _myBookingsPage;
+    public string WelcomeMessage { get; set; }
     public DashboardPage(BookRoomPage bookRoomPage, MyBookingsPage myBookingsPage)
     {
         _bookroompage = bookRoomPage;
         _myBookingsPage = myBookingsPage;
         InitializeComponent();
+        if (App.CurrentUser != null)
+        {
+            WelcomeMessage = $"Welcome, {App.CurrentUser.FirstName}!";
+        }
+        else
+        {
+            WelcomeMessage = "Welcome!";
+        }
+        BindingContext = this;
     }
 
     private async void StandardRoom_Clicked(object sender, EventArgs e)
