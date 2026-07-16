@@ -150,51 +150,6 @@
 
         </ScrollView>
 
-
-
-        <Frame
-            Grid.Row="1"
-            BackgroundColor="#EAF2F8"
-            CornerRadius="16"
-            Padding="15"
-            HasShadow="False">
-
-
-            <Grid
-                ColumnDefinitions="*,*,*,*"
-                ColumnSpacing="10">
-
-
-                <Button
-                    Grid.Column="0"
-                    Text="Book&#10;Room"
-                    HeightRequest="60"/>
-
-
-                <Button
-                    Grid.Column="1"
-                    Text="My&#10;Bookings"
-                    HeightRequest="60"/>
-
-
-                <Button
-                    Grid.Column="2"
-                    Text="Home"
-                    HeightRequest="60"/>
-
-
-                <Button
-                    Grid.Column="3"
-                    Text="Profile"
-                    HeightRequest="60"/>
-
-
-            </Grid>
-
-
-        </Frame>
-
-
     </Grid>
 
 

@@ -52,10 +52,7 @@
                 HeightRequest="50"
                 CornerRadius="10"/>
 
-            <Label
-                Text="Dont have an account? create"
-                HorizontalOptions="Center"
-                TextColor="#0F4C81"/>
+           
         </VerticalStackLayout>
     </ScrollView>
 

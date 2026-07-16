@@ -47,7 +47,8 @@
                             TextColor="#0F4C81"/>
 
                         <Label
-                            Text="Comfortable room with basic amenities, ideal for solo travelers or business guests."/>
+                            Text="Comfortable room with basic amenities, ideal for solo travelers or business guests."
+                            TextColor="Black"/>
 
                     </VerticalStackLayout>
 
@@ -66,17 +67,28 @@
                             FontAttributes="Bold"
                             TextColor="#0F4C81"/>
 
-                        <Label Text="• 1 Single Bed"/>
-                        <Label Text="• Air Conditioning"/>
-                        <Label Text="• Free Wi-Fi"/>
-                        <Label Text="• 32&quot; Smart TV"/>
-                        <Label Text="• Mini Fridge"/>
-                        <Label Text="• Hair Dryer"/>
-                        <Label Text="• Microwave"/>
-                        <Label Text="• Work Desk"/>
-                        <Label Text="• Private Bathroom"/>
-                        <Label Text="• Towels and Toiletries"/>
-                        <Label Text="• Complementary Bottled Water"/>
+                        <Label Text="• 1 Single Bed"
+                               TextColor="Black"/>
+                        <Label Text="• Air Conditioning"
+                               TextColor="Black"/>
+                        <Label Text="• Free Wi-Fi"
+                               TextColor="Black"/>
+                        <Label Text="• 32&quot; Smart TV"
+                               TextColor="Black"/>
+                        <Label Text="• Mini Fridge"
+                               TextColor="Black"/>
+                        <Label Text="• Hair Dryer"
+                               TextColor="Black"/>
+                        <Label Text="• Microwave"
+                               TextColor="Black"/>
+                        <Label Text="• Work Desk"
+                               TextColor="Black"/>
+                        <Label Text="• Private Bathroom"
+                               TextColor="Black"/>
+                        <Label Text="• Towels and Toiletries"
+                               TextColor="Black"/>
+                        <Label Text="• Complementary Bottled Water"
+                               TextColor="Black"/>
 
                     </VerticalStackLayout>
 
@@ -92,41 +104,6 @@
             </VerticalStackLayout>
 
         </ScrollView>
-
-        <Frame
-            Grid.Row="1"
-            BackgroundColor="#EAF2F8"
-            CornerRadius="16"
-            Padding="15"
-            HasShadow="False">
-
-            <Grid
-                ColumnDefinitions="*,*,*,*"
-                ColumnSpacing="10">
-
-                <Button
-                    Grid.Column="0"
-                    Text="Book&#10;Room"
-                    HeightRequest="60"/>
-
-                <Button
-                    Grid.Column="1"
-                    Text="My&#10;Bookings"
-                    HeightRequest="60"/>
-
-                <Button
-                    Grid.Column="2"
-                    Text="Home"
-                    HeightRequest="60"/>
-
-                <Button
-                    Grid.Column="3"
-                    Text="Profile"
-                    HeightRequest="60"/>
-
-            </Grid>
-
-        </Frame>
 
     </Grid>
 

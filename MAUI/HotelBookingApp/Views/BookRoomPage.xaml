@@ -214,7 +214,8 @@
 
                         <DatePicker
                             HeightRequest="45"
-                            Date="{Binding CheckInDate}" />
+                            Date="{Binding CheckInDate}" 
+                            TextColor="#0F4C81"/>
 
 
 
@@ -226,7 +227,8 @@
 
                         <DatePicker
                             HeightRequest="45"
-                            Date="{Binding CheckOutDate}" />
+                            Date="{Binding CheckOutDate}"
+                            TextColor="#0F4C81"/>
 
 
 
@@ -242,7 +244,8 @@
                             Keyboard="Numeric"
                             HeightRequest="45"
                             BackgroundColor="#F8FAFC"
-                            Text="{Binding Guests}" />
+                            Text="{Binding Guests}" 
+                            TextColor="#0F4C81"/>
 
 
                     </VerticalStackLayout>
@@ -276,55 +279,6 @@
 
 
         <!-- Bottom Navigation -->
-        <Grid
-            Grid.Row="1"
-            Padding="15"
-            BackgroundColor="#EAF2F8"
-            ColumnDefinitions="*,*,*,*"
-            ColumnSpacing="10">
-
-
-
-            <Button
-                Grid.Column="0"
-                Text="Book&#10;Room"
-                HeightRequest="60"
-                CornerRadius="10"
-                BackgroundColor="#0F4C81"
-                TextColor="White" />
-
-
-
-            <Button
-                Grid.Column="1"
-                Text="My&#10;Bookings"
-                HeightRequest="60"
-                CornerRadius="10"
-                BackgroundColor="White"
-                TextColor="#0F4C81" />
-
-
-
-            <Button
-                Grid.Column="2"
-                Text="Home"
-                HeightRequest="60"
-                CornerRadius="10"
-                BackgroundColor="White"
-                TextColor="#0F4C81" />
-
-
-
-            <Button
-                Grid.Column="3"
-                Text="Profile"
-                HeightRequest="60"
-                CornerRadius="10"
-                BackgroundColor="White"
-                TextColor="#0F4C81" />
-
-
-        </Grid>
 
 
     </Grid>

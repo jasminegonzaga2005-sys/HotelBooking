@@ -47,7 +47,8 @@
                             TextColor="#0F4C81"/>
 
                         <Label
-                            Text="Spacious room offering enhanced comfort and modern amenities for couples or leisure travelers."/>
+                            Text="Spacious room offering enhanced comfort and modern amenities for couples or leisure travelers."
+                            TextColor="Black"/>
 
                     </VerticalStackLayout>
 
@@ -66,18 +67,30 @@
                             FontAttributes="Bold"
                             TextColor="#0F4C81"/>
 
-                        <Label Text="• 1 Queen Bed"/>
-                        <Label Text="• Air Conditioning"/>
-                        <Label Text="• Free Wi-Fi"/>
-                        <Label Text="• 43&quot; Smart TV"/>
-                        <Label Text="• Mini Fridge"/>
-                        <Label Text="• Coffee &amp; Tea Set"/>
-                        <Label Text="• Hair Dryer"/>
-                        <Label Text="• Microwave"/>
-                        <Label Text="• Work Desk"/>
-                        <Label Text="• Private Bathroom"/>
-                        <Label Text="• Towels and Toiletries"/>
-                        <Label Text="• Complementary Bottled Water"/>
+                        <Label Text="• 1 Queen Bed"
+                               TextColor="Black"/>
+                        <Label Text="• Air Conditioning"
+                               TextColor="Black"/>
+                        <Label Text="• Free Wi-Fi"
+                               TextColor="Black"/>
+                        <Label Text="• 43&quot; Smart TV"
+                               TextColor="Black"/>
+                        <Label Text="• Mini Fridge"
+                               TextColor="Black"/>
+                        <Label Text="• Coffee &amp; Tea Set"
+                               TextColor="Black"/>
+                        <Label Text="• Hair Dryer"
+                               TextColor="Black"/>
+                        <Label Text="• Microwave"
+                               TextColor="Black"/>
+                        <Label Text="• Work Desk"
+                               TextColor="Black"/>
+                        <Label Text="• Private Bathroom"
+                               TextColor="Black"/>
+                        <Label Text="• Towels and Toiletries"
+                               TextColor="Black"/>
+                        <Label Text="• Complementary Bottled Water"
+                               TextColor="Black"/>
 
                     </VerticalStackLayout>
 
@@ -93,41 +106,6 @@
             </VerticalStackLayout>
 
         </ScrollView>
-
-        <Frame
-            Grid.Row="1"
-            BackgroundColor="#EAF2F8"
-            CornerRadius="16"
-            Padding="15"
-            HasShadow="False">
-
-            <Grid
-                ColumnDefinitions="*,*,*,*"
-                ColumnSpacing="10">
-
-                <Button
-                    Grid.Column="0"
-                    Text="Book&#10;Room"
-                    HeightRequest="60"/>
-
-                <Button
-                    Grid.Column="1"
-                    Text="My&#10;Bookings"
-                    HeightRequest="60"/>
-
-                <Button
-                    Grid.Column="2"
-                    Text="Home"
-                    HeightRequest="60"/>
-
-                <Button
-                    Grid.Column="3"
-                    Text="Profile"
-                    HeightRequest="60"/>
-
-            </Grid>
-
-        </Frame>
 
     </Grid>
 

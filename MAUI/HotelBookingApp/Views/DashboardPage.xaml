@@ -95,11 +95,11 @@
             <Frame
                 BackgroundColor="#EAF2F8"
                 CornerRadius="16"
-                Padding="15"
+                Padding="12"
                 HasShadow="False">
 
                 <Grid
-                    ColumnDefinitions="*,*,*,*"
+                    ColumnDefinitions="*,*,*"
                     ColumnSpacing="10">
 
                     <Button
@@ -109,18 +109,13 @@
 
                     <Button
                         Grid.Column="1"
-                        Text="My&#10;Bookings"
-                        Clicked="MyBookings_Clicked"/>
-
-                    <Button
-                        Grid.Column="2"
                         Text="Home"
                         Clicked="Home_Clicked"/>
 
                     <Button
-                        Grid.Column="3"
-                        Text="Profile"
-                        Clicked="Profile_Clicked"/>
+                        Grid.Column="2"
+                        Text="My&#10;Bookings"
+                        Clicked="MyBookings_Clicked"/>
 
                 </Grid>
 

@@ -20,7 +20,6 @@ public class DashboardViewModel : BaseViewModel
     public ICommand GoToExecutiveSuiteCommand { get; }
     public ICommand GoToBookRoomCommand {  get; }
     public ICommand GoToMyBookingsCommand { get; }
-    public ICommand GoToMyProfileCommand {  get; }
 
 
 
@@ -47,8 +46,7 @@ public class DashboardViewModel : BaseViewModel
         GoToMyBookingsCommand = new Command(async () =>
             await GoToMyBookingsAsync());
 
-        GoToMyProfileCommand = new Command(async () =>
-            await GoToMyProfileAsync());
+        
 
         _bookroompage = bookroompage;
         _mybookingspage = myBookingsPage;
@@ -93,9 +91,5 @@ public class DashboardViewModel : BaseViewModel
         await Application.Current.MainPage.Navigation
             .PushAsync(_mybookingspage);
     }
-    private async Task GoToMyProfileAsync()
-    {
-        await Application.Current.MainPage.Navigation
-            .PushAsync(new ProfilePage());
-    }
+    
 }

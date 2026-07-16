@@ -63,8 +63,8 @@ public partial class DashboardPage : ContentPage
         await DisplayAlert("Home", "You are already on the homepage.", "OK");
     }
 
-    private async void Profile_Clicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(_myBookingsPage);
-    }
+    //private async void Profile_Clicked(object sender, EventArgs e)
+    //{
+    //    await Navigation.PushAsync(_myBookingsPage);
+    //}
 }

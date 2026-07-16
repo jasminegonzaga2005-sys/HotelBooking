@@ -22,7 +22,7 @@ namespace HotelBookingApp
 
             builder.Services.AddHttpClient<ApiService>(client =>
             {
-                client.BaseAddress = new Uri("http://192.168.68.132:5226/");
+                client.BaseAddress = new Uri("http://172.26.134.45:5226/");
             });
 
             // ViewModels
@@ -42,7 +42,7 @@ namespace HotelBookingApp
             builder.Services.AddTransient<ExecutiveSuitePage>();
             builder.Services.AddTransient<BookRoomPage>();
             builder.Services.AddTransient<MyBookingsPage>();
-            builder.Services.AddTransient<ProfilePage>();
+            
             builder.Services.AddTransient<PaymentPage>();
             builder.Services.AddTransient<BookRoomPage>();
 
