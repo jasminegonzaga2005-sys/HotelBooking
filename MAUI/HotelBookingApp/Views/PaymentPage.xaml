@@ -64,6 +64,12 @@
 
 
                                 <Label
+                                    x:Name="RoomRateLabel"
+                                    Text="Room Rate per Night:"
+                                    TextColor="#444"/>
+
+
+                                <Label
                                     x:Name="CheckInLabel"
                                     Text="Check-in:"
                                     TextColor="#444"/>

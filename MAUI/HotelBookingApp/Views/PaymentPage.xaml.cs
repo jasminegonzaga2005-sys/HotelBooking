@@ -32,6 +32,10 @@ public partial class PaymentPage : ContentPage
             $"Room: {_booking.Room.RoomNum} ({_booking.Room.RoomType.RoomTypeName})";
 
 
+        RoomRateLabel.Text =
+            $"Room Rate per Night: ₱{_booking.Room.RoomType.Price:N2}";
+
+
         CheckInLabel.Text =
             $"Check-in: {_booking.CheckIn:MMMM dd, yyyy}";
 

@@ -1,5 +1,7 @@
+using System;
 using HotelBookingApp.Services;
 using HotelBookingApp.ViewModels;
+using Microsoft.Maui.Controls;
 
 namespace HotelBookingApp.Views;
 
@@ -8,110 +10,65 @@ public partial class MyBookingsPage : ContentPage
     private readonly MyBookingsViewModel _viewModel;
     private readonly ApiService _apiService;
 
-
-
-    public MyBookingsPage(
-        MyBookingsViewModel viewModel,
-        ApiService apiService)
+    public MyBookingsPage(MyBookingsViewModel viewModel, ApiService apiService)
     {
         InitializeComponent();
-
         BindingContext = _viewModel = viewModel;
         _apiService = apiService;
     }
 
-
-
-
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-
         await _viewModel.LoadBookings();
     }
 
-
-
-
-
-    private async void ContinuePayment_Clicked(
-        object sender,
-        EventArgs e)
+    private async void ContinuePayment_Clicked(object sender, EventArgs e)
     {
         var booking = _viewModel.SelectedBooking;
 
-
         if (booking == null)
         {
-            await DisplayAlert(
-                "No Booking Selected",
-                "Please select a booking first.",
-                "OK");
-
+            await DisplayAlert("No Booking Selected", "Please select a booking first.", "OK");
             return;
         }
 
-
-
-        if (!booking.BookingStatus.Equals(
-                "Pending",
-                StringComparison.OrdinalIgnoreCase))
+        if (!booking.BookingStatus.Equals("Pending", StringComparison.OrdinalIgnoreCase))
         {
-            await DisplayAlert(
-                "Cannot Continue",
-                "Only pending bookings can continue to payment.",
-                "OK");
-
+            await DisplayAlert("Cannot Continue", "Only pending bookings can continue to payment.", "OK");
             return;
         }
 
+        // Resolves PaymentPage cleanly through the MAUI dependency container
+        var paymentPage = Handler?.MauiContext?.Services.GetService<PaymentPage>();
+        if (paymentPage != null)
+        {
+            // Pass the runtime booking data to the page before pushing it
+            // (Assumes PaymentPage has a public property or its ViewModel accepts it)
+            if (paymentPage.BindingContext is PaymentViewModel paymentVm)
+            {
+                paymentVm.CurrentBooking = booking;
+            }
 
-
-
-        await Navigation.PushAsync(
-            new PaymentPage(
-                booking,
-                _apiService
-            )
-        );
+            await Navigation.PushAsync(paymentPage);
+        }
     }
 
-
-
-
-
-    private async void CancelBooking_Clicked(
-        object sender,
-        EventArgs e)
+    private async void CancelBooking_Clicked(object sender, EventArgs e)
     {
         var booking = _viewModel.SelectedBooking;
 
-
         if (booking == null)
         {
-            await DisplayAlert(
-                "No Booking Selected",
-                "Please select a booking first.",
-                "OK");
-
+            await DisplayAlert("No Booking Selected", "Please select a booking first.", "OK");
             return;
         }
 
-
-
-        if (!booking.BookingStatus.Equals(
-                "Pending",
-                StringComparison.OrdinalIgnoreCase))
+        if (!booking.BookingStatus.Equals("Pending", StringComparison.OrdinalIgnoreCase))
         {
-            await DisplayAlert(
-                "Cannot Cancel Booking",
-                "Only pending bookings can be cancelled.",
-                "OK");
-
+            await DisplayAlert("Cannot Cancel Booking", "Only pending bookings can be cancelled.", "OK");
             return;
         }
-
-
 
         bool answer = await DisplayAlert(
             "Cancel Booking",
@@ -119,63 +76,29 @@ public partial class MyBookingsPage : ContentPage
             "Yes",
             "No");
 
-
-
         if (!answer)
             return;
 
-
-
-
-        var bookingCancelled =
-            await _viewModel.UpdateBookingStatus(
-                "Cancelled",
-                booking.BookingID
-            );
-
-
+        var bookingCancelled = await _viewModel.UpdateBookingStatus("Cancelled", booking.BookingID);
 
         if (!bookingCancelled)
         {
-            await DisplayAlert(
-                "Error",
-                "Unable to cancel booking.",
-                "OK");
-
+            await DisplayAlert("Error", "Unable to cancel booking.", "OK");
             return;
         }
 
-
-
-
-        var roomUpdated =
-            await _viewModel.UpdateRoomStatus(
-                "Available",
-                booking.RoomID
-            );
-
-
+        var roomUpdated = await _viewModel.UpdateRoomStatus("Available", booking.RoomID);
 
         if (!roomUpdated)
         {
-            await DisplayAlert(
-                "Warning",
-                "Booking cancelled but room status failed to update.",
-                "OK");
+            await DisplayAlert("Warning", "Booking cancelled but room status failed to update.", "OK");
         }
         else
         {
-            await DisplayAlert(
-                "Cancelled",
-                "Your booking has been cancelled.",
-                "OK");
+            await DisplayAlert("Cancelled", "Your booking has been cancelled.", "OK");
         }
 
-
-
         await _viewModel.LoadBookings();
-
-
         _viewModel.SelectedBooking = null;
     }
 }

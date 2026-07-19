@@ -7,25 +7,20 @@
     BackgroundColor="#F4F8FB"
     Title="My Bookings">
 
-
     <ContentPage.Resources>
         <ResourceDictionary>
-
-            <converters:BookingStatusColorConverter
-                x:Key="BookingStatusColorConverter"/>
-
+            <!-- Status Color Converter mapping to your HTML color tokens -->
+            <converters:BookingStatusColorConverter x:Key="BookingStatusColorConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-
-
+    <!-- Main Page Layout Grid (3 rows matching grid-template-rows: auto 1fr auto) -->
     <Grid
         RowDefinitions="Auto,*,Auto"
         Padding="20"
         RowSpacing="15">
 
-
-        <!-- Title -->
+        <!-- 1. Title -->
         <Label
             Grid.Row="0"
             Text="My Bookings"
@@ -33,239 +28,140 @@
             FontAttributes="Bold"
             TextColor="#0F4C81"/>
 
-
-
-        <!-- Booking List -->
+        <!-- 2. Booking List Container -->
         <Border
             Grid.Row="1"
             BackgroundColor="White"
             Stroke="#D8E2EC"
             StrokeThickness="1"
             Padding="15">
-
-
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="16"/>
             </Border.StrokeShape>
-
-
 
             <CollectionView
                 ItemsSource="{Binding Bookings}"
                 SelectedItem="{Binding SelectedBooking}"
                 SelectionMode="Single">
 
-
+                <!-- Empty State Fallback -->
                 <CollectionView.EmptyView>
-
                     <Label
                         Text="No bookings found."
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
                         TextColor="Gray"/>
-
                 </CollectionView.EmptyView>
 
-
-
+                <!-- Individual Booking Card Template -->
                 <CollectionView.ItemTemplate>
-
                     <DataTemplate>
-
-
                         <Border
-                            Margin="0,5"
+                            Margin="0,0,0,10"
                             Padding="15"
                             BackgroundColor="#EAF2F8"
                             Stroke="#D8E2EC"
                             StrokeThickness="1">
-
-
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="12"/>
                             </Border.StrokeShape>
 
-
-
+                            <!-- Visual States representing normal vs selected styles -->
                             <VisualStateManager.VisualStateGroups>
-
                                 <VisualStateGroup Name="CommonStates">
-
-
                                     <VisualState Name="Normal">
-
                                         <VisualState.Setters>
-
-                                            <Setter
-                                                Property="Stroke"
-                                                Value="#D8E2EC"/>
-
-                                            <Setter
-                                                Property="StrokeThickness"
-                                                Value="1"/>
-
-                                            <Setter
-                                                Property="BackgroundColor"
-                                                Value="#EAF2F8"/>
-
+                                            <Setter Property="Stroke" Value="#D8E2EC"/>
+                                            <Setter Property="StrokeThickness" Value="1"/>
+                                            <Setter Property="BackgroundColor" Value="#EAF2F8"/>
                                         </VisualState.Setters>
-
                                     </VisualState>
-
-
-
-
                                     <VisualState Name="Selected">
-
                                         <VisualState.Setters>
-
-                                            <Setter
-                                                Property="Stroke"
-                                                Value="#0F4C81"/>
-
-                                            <Setter
-                                                Property="StrokeThickness"
-                                                Value="3"/>
-
-                                            <Setter
-                                                Property="BackgroundColor"
-                                                Value="#D6EAF8"/>
-
+                                            <Setter Property="Stroke" Value="#0F4C81"/>
+                                            <Setter Property="StrokeThickness" Value="3"/>
+                                            <Setter Property="BackgroundColor" Value="#D6EAF8"/>
                                         </VisualState.Setters>
-
                                     </VisualState>
-
-
                                 </VisualStateGroup>
-
-
                             </VisualStateManager.VisualStateGroups>
 
-
-
-
-
+                            <!-- Card Inner Grid -->
                             <Grid
                                 RowDefinitions="Auto,Auto,Auto,Auto"
                                 ColumnDefinitions="*,Auto"
                                 RowSpacing="8">
 
-
-
-                                <!-- Room -->
+                                <!-- Room Number -->
                                 <Label
                                     Grid.Row="0"
                                     Grid.Column="0"
-                                    Text="{Binding Room.RoomNum,
-                                    StringFormat='Room {0}'}"
+                                    Text="{Binding RoomNum, StringFormat='Room {0}'}"
                                     FontSize="18"
                                     FontAttributes="Bold"
                                     TextColor="#0F4C81"/>
 
-
-
-
-                                <!-- Status -->
+                                <!-- Booking Status -->
                                 <Label
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     Text="{Binding BookingStatus}"
                                     FontAttributes="Bold"
                                     HorizontalOptions="End"
-                                    TextColor="{Binding BookingStatus,
-                                    Converter={StaticResource BookingStatusColorConverter}}"/>
-
-
-
+                                    TextColor="{Binding BookingStatus, Converter={StaticResource BookingStatusColorConverter}}"/>
 
                                 <!-- Room Type -->
                                 <Label
                                     Grid.Row="1"
                                     Grid.Column="0"
-                                    Text="{Binding Room.RoomType.RoomTypeName,
-                                    StringFormat='Type: {0}'}"
-                                    TextColor="#444"/>
+                                    Grid.ColumnSpan="2"
+                                    Text="{Binding RoomTypeName, StringFormat='Type: {0}'}"
+                                    TextColor="#444444"
+                                    FontSize="14"/>
 
-
-
-
-
-                                <!-- Dates -->
+                                <!-- Dates Layout -->
                                 <VerticalStackLayout
                                     Grid.Row="2"
                                     Grid.ColumnSpan="2"
                                     Spacing="3">
-
-
                                     <Label
-                                        Text="{Binding CheckIn,
-                                        StringFormat='Check-in: {0:MMMM dd, yyyy}'}"
-                                        TextColor="#444"/>
-
-
+                                        Text="{Binding CheckIn, StringFormat='Check-in: {0:MMMM dd, yyyy}'}"
+                                        TextColor="#444444"
+                                        FontSize="14"/>
                                     <Label
-                                        Text="{Binding CheckOut,
-                                        StringFormat='Check-out: {0:MMMM dd, yyyy}'}"
-                                        TextColor="#444"/>
-
-
+                                        Text="{Binding CheckOut, StringFormat='Check-out: {0:MMMM dd, yyyy}'}"
+                                        TextColor="#444444"
+                                        FontSize="14"/>
                                 </VerticalStackLayout>
 
-
-
-
-
-                                <!-- Guests and Cost -->
+                                <!-- Details & Total Cost Layout -->
                                 <VerticalStackLayout
                                     Grid.Row="3"
                                     Grid.ColumnSpan="2"
                                     Spacing="3">
-
-
                                     <Label
-                                        Text="{Binding NumberOfGuests,
-                                        StringFormat='Guests: {0}'}"
-                                        TextColor="#444"/>
-
-
+                                        Text="{Binding NumberOfGuests, StringFormat='Guests: {0}'}"
+                                        TextColor="#444444"
+                                        FontSize="14"/>
                                     <Label
-                                        Text="{Binding TotalCost,
-                                        StringFormat='Total: ₱{0:N2}'}"
+                                        Text="{Binding TotalCost, StringFormat='Total: ₱{0:N2}'}"
                                         FontAttributes="Bold"
-                                        TextColor="#0F4C81"/>
-
-
+                                        TextColor="#0F4C81"
+                                        FontSize="16"/>
                                 </VerticalStackLayout>
 
-
                             </Grid>
-
-
                         </Border>
-
-
                     </DataTemplate>
-
-
                 </CollectionView.ItemTemplate>
-
-
             </CollectionView>
-
-
         </Border>
 
-
-
-
-
-
-        <!-- Bottom Buttons -->
+        <!-- 3. Action Buttons -->
         <Grid
             Grid.Row="2"
             ColumnDefinitions="*,*"
             ColumnSpacing="10">
-
 
             <Button
                 Grid.Column="0"
@@ -274,10 +170,8 @@
                 BackgroundColor="#0F4C81"
                 TextColor="White"
                 CornerRadius="10"
+                FontAttributes="Bold"
                 HeightRequest="50"/>
-
-
-
 
             <Button
                 Grid.Column="1"
@@ -288,13 +182,9 @@
                 BorderColor="#0F4C81"
                 BorderWidth="1"
                 CornerRadius="10"
+                FontAttributes="Bold"
                 HeightRequest="50"/>
-
-
         </Grid>
 
-
     </Grid>
-
-
 </ContentPage>
