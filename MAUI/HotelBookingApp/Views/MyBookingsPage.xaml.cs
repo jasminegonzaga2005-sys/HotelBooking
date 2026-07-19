@@ -39,16 +39,12 @@ public partial class MyBookingsPage : ContentPage
             return;
         }
 
-        // Resolves PaymentPage cleanly through the MAUI dependency container
+        // Resolves the Page with its registered ApiService instance cleanly
         var paymentPage = Handler?.MauiContext?.Services.GetService<PaymentPage>();
         if (paymentPage != null)
         {
-            // Pass the runtime booking data to the page before pushing it
-            // (Assumes PaymentPage has a public property or its ViewModel accepts it)
-            if (paymentPage.BindingContext is PaymentViewModel paymentVm)
-            {
-                paymentVm.CurrentBooking = booking;
-            }
+            // Explicitly pass the runtime booking details down
+            paymentPage.InitializeBooking(booking);
 
             await Navigation.PushAsync(paymentPage);
         }

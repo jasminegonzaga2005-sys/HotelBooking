@@ -2,11 +2,112 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HotelBookingApp.Views.FeedbackPage"
-             Title="FeedbackPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             BackgroundColor="#D6D9DC">
+
+    <ContentPage.Resources>
+        <!-- Consistent Custom Colors -->
+        <Color x:Key="BgOuter">#EAF2F8</Color>
+        <Color x:Key="CardBg">#FFFFFF</Color>
+        <Color x:Key="Primary">#0F4C81</Color>
+        <Color x:Key="AccentOrange">#E67E22</Color>
+        <Color x:Key="TextMuted">#7A8B99</Color>
+    </ContentPage.Resources>
+
+    <!-- Outer Body Centering Container -->
+    <ScrollView VerticalOptions="Center" HorizontalOptions="Center">
+
+        <!-- phone-frame -->
+        <Border WidthRequest="340"
+                BackgroundColor="{StaticResource BgOuter}"
+                StrokeShape="RoundRectangle 20"
+                Padding="16"
+                Margin="20"
+                StrokeThickness="0">
+            <Border.Shadow>
+                <Shadow Brush="{StaticResource Primary}" Offset="0,10" Radius="30" Opacity="0.15" />
+            </Border.Shadow>
+
+            <!-- card -->
+            <Border BackgroundColor="{StaticResource CardBg}"
+                    StrokeShape="RoundRectangle 16"
+                    Padding="24, 28"
+                    StrokeThickness="0">
+                <Border.Shadow>
+                    <Shadow Brush="{StaticResource Primary}" Offset="0,4" Radius="14" Opacity="0.08" />
+                </Border.Shadow>
+
+                <Grid RowDefinitions="Auto, Auto, Auto, *" RowSpacing="0">
+
+                    <!-- back-link -->
+                    <Label Grid.Row="0"
+                           Text="← Back"
+                           TextColor="{StaticResource Primary}"
+                           FontAttributes="Bold"
+                           FontSize="13"
+                           HorizontalOptions="Start"
+                           Margin="0,0,0,16">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <!-- hotel-name -->
+                    <Label Grid.Row="1"
+                           Text="Hotel Name Feedback"
+                           TextColor="{StaticResource Primary}"
+                           FontSize="21"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,16" />
+
+                    <!-- rating-row -->
+                    <StackLayout Grid.Row="2"
+                                 Orientation="Horizontal"
+                                 HorizontalOptions="Center"
+                                 Spacing="8"
+                                 Margin="0,0,0,22">
+
+                        <Label Text="4/5" 
+                               TextColor="{StaticResource AccentOrange}" 
+                               FontAttributes="Bold" 
+                               FontSize="15" />
+
+                        <Label Text="Rating" 
+                               TextColor="{StaticResource Primary}" 
+                               FontAttributes="None" 
+                               FontSize="14" />
+
+                        <Label Text="33 reviews" 
+                               TextColor="{StaticResource TextMuted}" 
+                               FontSize="12"
+                               VerticalOptions="End" />
+                    </StackLayout>
+
+                    <!-- review-list -->
+                    <!-- Setting a MaxHeightRequest prevents infinite vertical scrolling inside the card -->
+                    <CollectionView Grid.Row="3" 
+                                    MaximumHeightRequest="300"
+                                    ItemsSource="{Binding ReviewsCollection}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="14" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <!-- review-item -->
+                                <Border BackgroundColor="{StaticResource BgOuter}"
+                                        StrokeShape="RoundRectangle 10"
+                                        Padding="14, 12"
+                                        StrokeThickness="0">
+                                    <Label Text="{Binding .}" 
+                                           TextColor="#333333" 
+                                           FontSize="14" />
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </Grid>
+            </Border>
+        </Border>
+    </ScrollView>
 </ContentPage>
