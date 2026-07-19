@@ -52,8 +52,27 @@
                 HeightRequest="50"
                 CornerRadius="10"/>
 
-           
+            <!-- Register Link -->
+            <HorizontalStackLayout
+        HorizontalOptions="Center"
+        Spacing="5">
+
+                <Label
+            Text="Don't have an account?"
+            TextColor="Gray"
+            VerticalOptions="Center"/>
+
+                <Button
+            Text="Create"
+            Command="{Binding RegisterCommand}"
+            BackgroundColor="Transparent"
+            TextColor="#0F4C81"
+            FontAttributes="Bold"
+            Padding="0"
+            BorderWidth="0"/>
+            </HorizontalStackLayout>
         </VerticalStackLayout>
+
     </ScrollView>
 
 </ContentPage>
