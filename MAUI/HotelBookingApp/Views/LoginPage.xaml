@@ -53,9 +53,9 @@
                 CornerRadius="10"/>
 
             <!-- Register Link -->
-            <HorizontalStackLayout
-        HorizontalOptions="Center"
-        Spacing="5">
+           <HorizontalStackLayout
+            HorizontalOptions="Center"
+            Spacing="5">
 
                 <Label
             Text="Don't have an account?"
@@ -70,7 +70,7 @@
             FontAttributes="Bold"
             Padding="0"
             BorderWidth="0"/>
-            </HorizontalStackLayout>
+            </HorizontalStackLayout> 
         </VerticalStackLayout>
 
     </ScrollView>
