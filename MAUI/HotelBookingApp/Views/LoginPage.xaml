@@ -71,6 +71,7 @@
             Padding="0"
             BorderWidth="0"/>
             </HorizontalStackLayout> 
+
         </VerticalStackLayout>
 
     </ScrollView>

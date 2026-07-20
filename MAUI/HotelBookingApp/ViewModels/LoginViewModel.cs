@@ -8,7 +8,7 @@ using HotelBookingApp.Views;
 
 namespace HotelBookingApp.ViewModels
 {
-    public partial class LoginViewModel: BaseViewModel
+    public partial class LoginViewModel : BaseViewModel
     {
         private readonly ApiService _apiService;
         private readonly DashboardPage _dashboardPage;
@@ -21,7 +21,9 @@ namespace HotelBookingApp.ViewModels
         {
             _apiService = apiService;
             _dashboardPage = dashboardPage;
+
             LoginCommand = new Command(async () => await LoginAsync());
+            RegisterCommand = new Command(async () => await GoToRegisterAsync()); // ✅ Added
         }
 
         public string Email
@@ -43,7 +45,7 @@ namespace HotelBookingApp.ViewModels
         }
 
         public ICommand LoginCommand { get; }
-
+        public ICommand RegisterCommand { get; } // ✅ Added
 
         private async Task LoginAsync()
         {
@@ -52,15 +54,11 @@ namespace HotelBookingApp.ViewModels
 
             try
             {
-                // Call the API through ApiService
                 var customer = await _apiService.LoginAsync(Email, Password);
 
                 if (customer != null)
                 {
-                    // Store logged-in customer globally
                     App.CurrentUser = customer;
-
-                    // Navigate to Dashboard
                     await Application.Current.MainPage.Navigation.PushAsync(_dashboardPage);
                 }
                 else
@@ -72,6 +70,12 @@ namespace HotelBookingApp.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private async Task GoToRegisterAsync()
+        {
+           
+            await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
         }
     }
 }
