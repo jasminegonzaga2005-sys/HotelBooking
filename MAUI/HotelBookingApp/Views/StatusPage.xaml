@@ -2,11 +2,87 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HotelBookingApp.Views.StatusPage"
-             Title="StatusPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Status Page"
+             BackgroundColor="#F5F9FC">
+
+    <ContentPage.Resources>
+        <Color x:Key="ThemePrimary">#0F4C81</Color>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto" Margin="16">
+
+        <!-- Header -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,0,16">
+            <VerticalStackLayout Grid.Column="0">
+                <HorizontalStackLayout Margin="0,0,0,4">
+                    <Ellipse WidthRequest="10" HeightRequest="10" Fill="{StaticResource ThemePrimary}" Margin="0,0,8,0" VerticalOptions="Center"/>
+                    <Label Text="FRONT DESK COMMAND CENTER" TextColor="{StaticResource ThemePrimary}" FontAttributes="Bold" FontSize="11"/>
+                </HorizontalStackLayout>
+                <Label Text="Hotel Reservations Hub" FontSize="24" FontAttributes="Bold" TextColor="#0F172A"/>
+            </VerticalStackLayout>
+
+            <Border Grid.Column="1" BackgroundColor="#CCFFFFFF" Stroke="#E2E8F0" StrokeShape="RoundRectangle 16" Padding="12,6" VerticalOptions="Center">
+                <HorizontalStackLayout>
+                    <Label Text="System Link: " FontSize="11" TextColor="#64748B" FontAttributes="Bold"/>
+                    <Label Text="Operational" FontSize="11" TextColor="#059669" FontAttributes="Bold"/>
+                </HorizontalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- Main Content -->
+        <Border Grid.Row="1" BackgroundColor="#D9FFFFFF" Stroke="#99FFFFFF" StrokeShape="RoundRectangle 20" Padding="16">
+            <Grid RowDefinitions="Auto,*">
+                <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,0,12">
+                    <VerticalStackLayout Grid.Column="0">
+                        <Label Text="Status Console" FontSize="18" FontAttributes="Bold" TextColor="#1E293B"/>
+                        <Label Text="Real-time status tracking and schedule validation for active reservations." FontSize="11" TextColor="#64748B"/>
+                    </VerticalStackLayout>
+                    <Border Grid.Column="1" BackgroundColor="#F1F5F9" Stroke="#E2E8F0" StrokeShape="RoundRectangle 10" Padding="8,4" VerticalOptions="Center">
+                        <Label Text="LIVE SYSTEM STREAM" FontSize="9" FontAttributes="Bold" TextColor="#475569"/>
+                    </Border>
+                </Grid>
+
+                <!-- Status Console Table List -->
+                <CollectionView Grid.Row="1" x:Name="StatusCollectionView">
+                    <CollectionView.Header>
+                        <Grid ColumnDefinitions="*,*,*,*,Auto" Padding="8" BackgroundColor="#F8FAFC">
+                            <Label Grid.Column="0" Text="GUEST" FontAttributes="Bold" FontSize="10" TextColor="#64748B"/>
+                            <Label Grid.Column="1" Text="ROOM" FontAttributes="Bold" FontSize="10" TextColor="#64748B"/>
+                            <Label Grid.Column="2" Text="START" FontAttributes="Bold" FontSize="10" TextColor="#64748B"/>
+                            <Label Grid.Column="3" Text="END" FontAttributes="Bold" FontSize="10" TextColor="#64748B"/>
+                            <Label Grid.Column="4" Text="ACTIONS" FontAttributes="Bold" FontSize="10" TextColor="#64748B" WidthRequest="110"/>
+                        </Grid>
+                    </CollectionView.Header>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,*,*,*,Auto" Padding="8" VerticalOptions="Center">
+                                <Label Grid.Column="0" Text="{Binding Guest}" FontAttributes="Bold" FontSize="11" TextColor="#0F172A" VerticalOptions="Center"/>
+                                <Label Grid.Column="1" Text="{Binding RoomCode}" FontAttributes="Bold" FontSize="11" TextColor="#0F4C81" VerticalOptions="Center"/>
+                                <Label Grid.Column="2" Text="{Binding Start}" FontSize="11" VerticalOptions="Center"/>
+                                <Label Grid.Column="3" Text="{Binding End}" FontSize="11" VerticalOptions="Center"/>
+                                <Picker Grid.Column="4" Title="State" SelectedItem="{Binding Status}" WidthRequest="110" FontSize="10">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Checked In</x:String>
+                                            <x:String>Checked Out</x:String>
+                                            <x:String>Cancelled</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Border>
+
+        <!-- Bottom Navigation -->
+        <Border Grid.Row="2" BackgroundColor="#CCFFFFFF" Stroke="#E2E8F0" StrokeShape="RoundRectangle 16" Padding="4" HorizontalOptions="Center" WidthRequest="400" Margin="0,12,0,0">
+            <Grid ColumnDefinitions="*,*,*">
+                <Button Grid.Column="0" Text="ALLOCATION" BackgroundColor="#EAF2F8" TextColor="#0F4C81" FontAttributes="Bold" FontSize="11" CornerRadius="12" Margin="2" Clicked="NavAllocation_Clicked"/>
+                <Button Grid.Column="1" Text="STATUS" BackgroundColor="#0F4C81" TextColor="White" FontAttributes="Bold" FontSize="11" CornerRadius="12" Margin="2"/>
+                <Button Grid.Column="2" Text="REVIEWS" BackgroundColor="#EAF2F8" TextColor="#0F4C81" FontAttributes="Bold" FontSize="11" CornerRadius="12" Margin="2" Clicked="NavReviews_Clicked"/>
+            </Grid>
+        </Border>
+    </Grid>
 </ContentPage>
