@@ -1,8 +1,6 @@
 using System;
-using System.Linq;
 using HotelBookingApp.Services;
 using HotelBookingApp.ViewModels;
-using Microsoft.Maui.Controls;
 
 namespace HotelBookingApp.Views;
 
@@ -10,14 +8,12 @@ public partial class MyBookingsPage : ContentPage
 {
     private readonly MyBookingsViewModel _viewModel;
     private readonly ApiService _apiService;
-    private readonly BookRoomPage _bookRoomPage;
 
-    public MyBookingsPage(MyBookingsViewModel viewModel, ApiService apiService, BookRoomPage bookRoomPage)
+    public MyBookingsPage(MyBookingsViewModel viewModel, ApiService apiService)
     {
         InitializeComponent();
         BindingContext = _viewModel = viewModel;
         _apiService = apiService;
-        _bookRoomPage = bookRoomPage;
     }
 
     protected override async void OnAppearing()
@@ -42,13 +38,11 @@ public partial class MyBookingsPage : ContentPage
             return;
         }
 
-        // Resolves the Page with its registered ApiService instance cleanly
         var paymentPage = Handler?.MauiContext?.Services.GetService<PaymentPage>();
+
         if (paymentPage != null)
         {
-            // Explicitly pass the runtime booking details down
             paymentPage.InitializeBooking(booking);
-
             await Navigation.PushAsync(paymentPage);
         }
     }
@@ -101,7 +95,42 @@ public partial class MyBookingsPage : ContentPage
         _viewModel.SelectedBooking = null;
     }
 
-    // --- NAVIGATION BAR HANDLERS ---
+    private void AgreeCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        if (e.Value)
+        {
+            DisplayAlert("Agreement", "You checked the box.", "OK");
+        }
+        else
+        {
+            DisplayAlert("Agreement", "You unchecked the box.", "OK");
+        }
+    }
+
+    private async void CloseModal_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PopModalAsync();
+    }
+
+    private async void AcceptModal_Clicked(object sender, EventArgs e)
+    {
+        await DisplayAlert("Accepted", "You've confirmed your booking.", "OK");
+
+        var booking = _viewModel.SelectedBooking;
+
+        if (booking != null)
+        {
+            var paymentPage = Handler?.MauiContext?.Services.GetService<PaymentPage>();
+
+            if (paymentPage != null)
+            {
+                paymentPage.InitializeBooking(booking);
+                await Navigation.PushAsync(paymentPage);
+            }
+        }
+
+        await Navigation.PopModalAsync();
+    }
 
     private async void Home_Clicked(object sender, EventArgs e)
     {
@@ -117,22 +146,11 @@ public partial class MyBookingsPage : ContentPage
 
     private async void BookRoom_Clicked(object sender, EventArgs e)
     {
-        if (_bookRoomPage == null)
-            return;
+        var bookRoomPage = Handler?.MauiContext?.Services.GetService<BookRoomPage>();
 
-        if (Navigation.NavigationStack.LastOrDefault() == _bookRoomPage)
-            return;
-
-        if (Navigation.NavigationStack.Contains(_bookRoomPage))
+        if (bookRoomPage != null)
         {
-            while (Navigation.NavigationStack.LastOrDefault() != _bookRoomPage && Navigation.NavigationStack.Count > 1)
-            {
-                await Navigation.PopAsync();
-            }
-        }
-        else
-        {
-            await Navigation.PushAsync(_bookRoomPage);
+            await Navigation.PushAsync(bookRoomPage);
         }
     }
 

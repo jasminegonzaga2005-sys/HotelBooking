@@ -26,11 +26,38 @@ namespace HotelBookingApp.Services
             return await _httpClient.GetFromJsonAsync<List<Customer>>("api/Customer");
         }
 
-        public async Task<Customer> CreateCustomerAsync(Customer customer)
+        public async Task<bool> CreateCustomerAsync(Customer customer)
         {
-            var response = await _httpClient.PostAsJsonAsync("api/Customer", customer);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<Customer>();
+            try
+            {
+                var requestBody = new
+                {
+                    firstName = customer.FirstName,
+                    lastName = customer.LastName,
+                    email = customer.Email,
+                    phoneNum = customer.PhoneNum,
+                    passowrd = customer.Password,
+                    role = customer.Role,
+
+                };
+                var response = await _httpClient.PostAsJsonAsync("api/Customer", requestBody);
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Customer created successfully.");
+                    return true;
+                }
+
+
+                var error = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Customer Creation failed: {error}");
+                return false;
+            }
+        
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Create Customer error: {ex.Message}");
+                return false;
+            };
         }
 
         //added this 

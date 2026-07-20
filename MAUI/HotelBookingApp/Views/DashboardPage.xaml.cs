@@ -4,14 +4,12 @@ namespace HotelBookingApp.Views;
 
 public partial class DashboardPage : ContentPage
 {
-    private readonly BookRoomPage _bookroompage;
-    private readonly MyBookingsPage _myBookingsPage;
     public string WelcomeMessage { get; set; }
-    public DashboardPage(BookRoomPage bookRoomPage, MyBookingsPage myBookingsPage)
+
+    public DashboardPage()
     {
-        _bookroompage = bookRoomPage;
-        _myBookingsPage = myBookingsPage;
         InitializeComponent();
+
         if (App.CurrentUser != null)
         {
             WelcomeMessage = $"Welcome, {App.CurrentUser.FirstName}!";
@@ -20,6 +18,7 @@ public partial class DashboardPage : ContentPage
         {
             WelcomeMessage = "Welcome!";
         }
+
         BindingContext = this;
     }
 
@@ -50,12 +49,22 @@ public partial class DashboardPage : ContentPage
 
     private async void BookRoom_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(_bookroompage);
+        var bookRoomPage = Handler?.MauiContext?.Services.GetService<BookRoomPage>();
+
+        if (bookRoomPage != null)
+        {
+            await Navigation.PushAsync(bookRoomPage);
+        }
     }
 
     private async void MyBookings_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(_myBookingsPage);
+        var myBookingsPage = Handler?.MauiContext?.Services.GetService<MyBookingsPage>();
+
+        if (myBookingsPage != null)
+        {
+            await Navigation.PushAsync(myBookingsPage);
+        }
     }
 
     private async void Home_Clicked(object sender, EventArgs e)
@@ -65,6 +74,11 @@ public partial class DashboardPage : ContentPage
 
     //private async void Profile_Clicked(object sender, EventArgs e)
     //{
-    //    await Navigation.PushAsync(_myBookingsPage);
+    //    var profilePage = Handler?.MauiContext?.Services.GetService<ProfilePage>();
+    //
+    //    if (profilePage != null)
+    //    {
+    //        await Navigation.PushAsync(profilePage);
+    //    }
     //}
 }

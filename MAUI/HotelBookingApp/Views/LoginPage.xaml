@@ -1,12 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="HotelBookingApp.Views.LoginPage"
-    xmlns:viewmodels="clr-namespace:HotelBookingApp.ViewModels"
     Title="Login"
     BackgroundColor="#F5F7FA">
-
 
     <ScrollView>
         <VerticalStackLayout
@@ -19,61 +17,61 @@
                 FontSize="30"
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
-                TextColor="#0F4C81"/>
+                TextColor="#0F4C81" />
 
             <Label
                 Text="Sign in to your account"
                 HorizontalOptions="Center"
                 FontSize="16"
-                TextColor="Gray"/>
+                TextColor="Gray" />
 
-            <!-- Email bound to ViewModel -->
+            <!-- Email -->
             <Entry
                 Text="{Binding Email}"
-                TextColor="Black"
                 Placeholder="Email Address"
                 Keyboard="Email"
-                HeightRequest="50"/>
+                TextColor="Black"
+                HeightRequest="50" />
 
-            <!-- Password bound to ViewModel -->
+            <!-- Password -->
             <Entry
                 Text="{Binding Password}"
-                TextColor="Black"
                 Placeholder="Password"
                 IsPassword="True"
-                HeightRequest="50"/>
+                TextColor="Black"
+                HeightRequest="50" />
 
-            <!-- Login button bound to LoginCommand -->
+            <!-- Login -->
             <Button
                 Text="LOGIN"
                 Command="{Binding LoginCommand}"
                 BackgroundColor="#0F4C81"
                 TextColor="White"
                 HeightRequest="50"
-                CornerRadius="10"/>
+                CornerRadius="10" />
 
-            <!-- Register Link -->
-           <HorizontalStackLayout
-            HorizontalOptions="Center"
-            Spacing="5">
+            <!-- Register -->
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="5">
 
                 <Label
-            Text="Don't have an account?"
-            TextColor="Gray"
-            VerticalOptions="Center"/>
+                    Text="Don't have an account?"
+                    TextColor="Gray"
+                    VerticalOptions="Center" />
 
                 <Button
-            Text="Create"
-            Command="{Binding RegisterCommand}"
-            BackgroundColor="Transparent"
-            TextColor="#0F4C81"
-            FontAttributes="Bold"
-            Padding="0"
-            BorderWidth="0"/>
-            </HorizontalStackLayout> 
+                    Text="Create"
+                    Command="{Binding RegisterCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="#0F4C81"
+                    FontAttributes="Bold"
+                    Padding="0"
+                    BorderWidth="0" />
+
+            </HorizontalStackLayout>
 
         </VerticalStackLayout>
-
     </ScrollView>
 
 </ContentPage>

@@ -47,6 +47,7 @@ namespace customerBookingAPI.Controllers
                 Password = request.Password,
                 PhoneNum = request.PhoneNum,
                 CreatedAt = DateTime.UtcNow,
+                Role = request.Role,
             };
 
             _context.Customers.Add(customer);

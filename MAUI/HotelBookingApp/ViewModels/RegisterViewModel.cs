@@ -1,28 +1,35 @@
-﻿using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
+using HotelBookingApp.Models;
+using HotelBookingApp.Services;
 using Microsoft.Maui.Controls;
+using HotelBookingApp.Views;
+using HotelBookingApp.ViewModels;
 
 namespace HotelBookingApp.ViewModels
 {
     public class RegisterViewModel : BindableObject
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly ApiService _apiService;
+        private readonly DashboardPage _dashboardPage;
 
+        public RegisterViewModel(ApiService apiService, DashboardPage dashboardPage )
+        {
+            _apiService = apiService;
+            RegisterCommand = new Command(async () => await RegisterAsync());
+            _dashboardPage = dashboardPage;
+        }
+
+        // Bound properties
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string PhoneNum { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string ConfirmPassword { get; set; } = string.Empty;
+        public string Role {  get; set; } = "Customer";
 
-        public Command RegisterCommand { get; }
-
-        public RegisterViewModel()
-        {
-            RegisterCommand = new Command(async () => await RegisterAsync());
-        }
+        public ICommand RegisterCommand { get; }
 
         private async Task RegisterAsync()
         {
@@ -32,29 +39,34 @@ namespace HotelBookingApp.ViewModels
                 return;
             }
 
-            var customer = new
+            var newCustomer = new Customer
             {
-                FirstName,
-                LastName,
-                Email,
-                Password,
-                PhoneNum
+                FirstName = FirstName,
+                LastName = LastName,
+                Email = Email,
+                Password = Password,
+                PhoneNum = PhoneNum,
+                Role = "Customer"
             };
 
-            var json = JsonSerializer.Serialize(customer);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = await _httpClient.PostAsync("https://yourapiurl/api/Customer", content);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                await Application.Current.MainPage.DisplayAlert("Success", "Account created successfully!", "OK");
-                await Application.Current.MainPage.Navigation.PopAsync();
+                var createdCustomer = await _apiService.CreateCustomerAsync(newCustomer);
+
+                if (createdCustomer)
+                {
+                    App.CurrentUser = newCustomer; // auto-login
+                    await Application.Current.MainPage.DisplayAlert("Success", "Account created successfully!", "OK");
+                    await Application.Current.MainPage.Navigation.PushAsync(_dashboardPage);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Registration failed.", "OK");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var error = await response.Content.ReadAsStringAsync();
-                await Application.Current.MainPage.DisplayAlert("Error", error, "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
     }

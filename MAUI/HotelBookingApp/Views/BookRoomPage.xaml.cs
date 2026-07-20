@@ -4,18 +4,20 @@ namespace HotelBookingApp.Views;
 
 public partial class BookRoomPage : ContentPage
 {
-    private readonly MyBookingsPage _myBookingsPage;
-    public BookRoomPage(BookRoomViewModel viewModel, MyBookingsPage myBookingsPage)
+    public BookRoomPage(BookRoomViewModel viewModel)
     {
         InitializeComponent();
-
         BindingContext = viewModel;
-        _myBookingsPage = myBookingsPage;
     }
 
     private async void MyBookings_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(_myBookingsPage);
+        var myBookingsPage = Handler?.MauiContext?.Services.GetService<MyBookingsPage>();
+
+        if (myBookingsPage != null)
+        {
+            await Navigation.PushAsync(myBookingsPage);
+        }
     }
 
     private async void Home_Clicked(object sender, EventArgs e)

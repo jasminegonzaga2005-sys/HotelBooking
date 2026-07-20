@@ -22,7 +22,8 @@ namespace HotelBookingApp
 
             builder.Services.AddHttpClient<ApiService>(client =>
             {
-                client.BaseAddress = new Uri("http://172.26.134.45:5226/");
+                //client.BaseAddress = new Uri("http://172.26.134.45:5226/");
+                client.BaseAddress = new Uri("https://localhost:7068/");
             });
 
             // ViewModels
@@ -31,6 +32,8 @@ namespace HotelBookingApp
             builder.Services.AddTransient<BookRoomViewModel>();
             builder.Services.AddTransient<MyBookingsViewModel>();
             builder.Services.AddTransient<PaymentViewModel>();
+            builder.Services.AddTransient<RegisterViewModel>();
+            builder.Services.AddTransient<RatingViewModel>();
 
             // Pages
             builder.Services.AddTransient<LoginPage>();
@@ -44,7 +47,14 @@ namespace HotelBookingApp
             builder.Services.AddTransient<MyBookingsPage>();
             
             builder.Services.AddTransient<PaymentPage>();
-            builder.Services.AddTransient<BookRoomPage>();
+            builder.Services.AddTransient<RegisterPage>();
+            builder.Services.AddTransient<RatingPage>();
+            builder.Services.AddTransient<ReviewsPage>();
+            builder.Services.AddTransient<Splashpage>();
+            builder.Services.AddTransient<StatusPage>();
+            builder.Services.AddTransient<AllocationWindow>();
+            builder.Services.AddTransient<ProfilePage>();
+
 
 
             // App

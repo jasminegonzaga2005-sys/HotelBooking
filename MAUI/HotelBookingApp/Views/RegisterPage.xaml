@@ -42,8 +42,8 @@
                             TextColor="#0F4C81"/>
 
                         <Entry
-                            x:Name="FirstNameEntry"
                             Placeholder="Juan"
+                            Text="{Binding FirstName}"
                             BackgroundColor="#F4F8FB"/>
                     </VerticalStackLayout>
 
@@ -55,8 +55,8 @@
                             TextColor="#0F4C81"/>
 
                         <Entry
-                            x:Name="LastNameEntry"
                             Placeholder="Dela Cruz"
+                            Text="{Binding LastName}"
                             BackgroundColor="#F4F8FB"/>
                     </VerticalStackLayout>
 
@@ -68,8 +68,8 @@
                             TextColor="#0F4C81"/>
 
                         <Entry
-                            x:Name="EmailEntry"
                             Placeholder="example@email.com"
+                            Text="{Binding Email}"
                             Keyboard="Email"
                             BackgroundColor="#F4F8FB"/>
                     </VerticalStackLayout>
@@ -82,8 +82,8 @@
                             TextColor="#0F4C81"/>
 
                         <Entry
-                            x:Name="PhoneEntry"
                             Placeholder="09XXXXXXXXX"
+                            Text="{Binding PhoneNum}"
                             Keyboard="Telephone"
                             BackgroundColor="#F4F8FB"/>
                     </VerticalStackLayout>
@@ -96,8 +96,8 @@
                             TextColor="#0F4C81"/>
 
                         <Entry
-                            x:Name="PasswordEntry"
                             Placeholder="Password"
+                            Text="{Binding Password}"
                             IsPassword="True"
                             BackgroundColor="#F4F8FB"/>
                     </VerticalStackLayout>
@@ -110,8 +110,8 @@
                             TextColor="#0F4C81"/>
 
                         <Entry
-                            x:Name="ConfirmPasswordEntry"
                             Placeholder="Confirm Password"
+                            Text="{Binding ConfirmPassword}"
                             IsPassword="True"
                             BackgroundColor="#F4F8FB"/>
                     </VerticalStackLayout>
@@ -123,7 +123,7 @@
                         TextColor="White"
                         HeightRequest="50"
                         CornerRadius="10"
-                        Clicked="Register_Clicked"/>
+                        Command="{Binding RegisterCommand}"/>
 
                     <HorizontalStackLayout
                         HorizontalOptions="Center">

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using HotelBookingApp.Services;
-using HotelBookingApp.Models;
 using HotelBookingApp.Views;
 
 namespace HotelBookingApp.ViewModels
@@ -11,19 +9,17 @@ namespace HotelBookingApp.ViewModels
     public partial class LoginViewModel : BaseViewModel
     {
         private readonly ApiService _apiService;
-        private readonly DashboardPage _dashboardPage;
 
-        private string _email;
-        private string _password;
+        private string _email = string.Empty;
+        private string _password = string.Empty;
         private bool _isBusy;
 
-        public LoginViewModel(ApiService apiService, DashboardPage dashboardPage)
+        public LoginViewModel(ApiService apiService)
         {
             _apiService = apiService;
-            _dashboardPage = dashboardPage;
 
             LoginCommand = new Command(async () => await LoginAsync());
-            RegisterCommand = new Command(async () => await GoToRegisterAsync()); // ✅ Added
+            RegisterCommand = new Command(async () => await GoToRegisterAsync());
         }
 
         public string Email
@@ -45,11 +41,14 @@ namespace HotelBookingApp.ViewModels
         }
 
         public ICommand LoginCommand { get; }
-        public ICommand RegisterCommand { get; } // ✅ Added
+
+        public ICommand RegisterCommand { get; }
 
         private async Task LoginAsync()
         {
-            if (IsBusy) return;
+            if (IsBusy)
+                return;
+
             IsBusy = true;
 
             try
@@ -59,11 +58,23 @@ namespace HotelBookingApp.ViewModels
                 if (customer != null)
                 {
                     App.CurrentUser = customer;
-                    await Application.Current.MainPage.Navigation.PushAsync(_dashboardPage);
+
+                    var dashboardPage =
+                        Application.Current?.Windows[0].Page?
+                        .Handler?.MauiContext?.Services
+                        .GetService<DashboardPage>();
+
+                    if (dashboardPage != null)
+                    {
+                        await Application.Current.MainPage.Navigation.PushAsync(dashboardPage);
+                    }
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Login Failed", "Invalid email or password.", "OK");
+                    await Application.Current.MainPage.DisplayAlert(
+                        "Login Failed",
+                        "Invalid email or password.",
+                        "OK");
                 }
             }
             finally
@@ -74,8 +85,15 @@ namespace HotelBookingApp.ViewModels
 
         private async Task GoToRegisterAsync()
         {
-           
-            await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
+            var registerPage =
+                Application.Current?.Windows[0].Page?
+                .Handler?.MauiContext?.Services
+                .GetService<RegisterPage>();
+
+            if (registerPage != null)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(registerPage);
+            }
         }
     }
 }
