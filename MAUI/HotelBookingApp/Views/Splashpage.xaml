@@ -87,7 +87,7 @@
                             CornerRadius="8"
                             Padding="20,10"
                             HeightRequest="40"
-                            VerticalOptions="Center"/>
+                            VerticalOptions="Center"/> 
                     </Grid>
                 </Grid>
             </Border>

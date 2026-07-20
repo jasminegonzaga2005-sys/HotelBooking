@@ -7,11 +7,11 @@ namespace HotelBookingApp
     {
         public static Customer? CurrentUser { get; set; }
 
-        public App(LoginPage loginPage)
+        public App(Splashpage splashpage)
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(loginPage);
+            MainPage = new NavigationPage(new Splashpage());
         }
     }
 }

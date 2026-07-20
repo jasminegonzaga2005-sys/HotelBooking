@@ -15,10 +15,17 @@ namespace HotelBookingApp.Views
         /// <summary>
         /// Handles the Continue button click event and navigates to the LoginPage.
         /// </summary>
+        //private async void OnContinueClicked(object sender, EventArgs e)
+        //{
+        //    // Navigates to the LoginPage inside the same folder
+        //    //await Navigation.PushAsync(new LoginPage());
+        //}
+
         private async void OnContinueClicked(object sender, EventArgs e)
         {
-            // Navigates to the LoginPage inside the same folder
-            //await Navigation.PushAsync(new LoginPage());
+            var loginPage = Handler.MauiContext.Services.GetService<LoginPage>();
+            await this.FadeTo(0, 300);
+            await Navigation.PushAsync(loginPage);
         }
     }
 }
