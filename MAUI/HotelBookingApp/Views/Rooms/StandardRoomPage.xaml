@@ -34,6 +34,13 @@
 
                 </Frame>
 
+                <Label
+                    Text="Rate of ₱1,500 per night"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    TextColor="#0F4C81"/>       
+
                 <Frame
                     BackgroundColor="#EAF2F8"
                     CornerRadius="15"
@@ -94,12 +101,7 @@
 
                 </Frame>
 
-                <Label
-                    Text="₱1,500 / Night"
-                    FontSize="20"
-                    FontAttributes="Bold"
-                    HorizontalOptions="Center"
-                    TextColor="#0F4C81"/>
+                
 
             </VerticalStackLayout>
 

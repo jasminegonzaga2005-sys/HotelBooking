@@ -178,37 +178,7 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Bottom Navigation Bar (3 items) -->
-        <Grid Grid.Row="1" 
-              ColumnDefinitions="*, *, *" 
-              Padding="15" 
-              ColumnSpacing="10" 
-              BackgroundColor="#EAF2F8">
-
-            <Button Grid.Column="0" 
-                    Text="Book&#10;Room" 
-                    HeightRequest="60" 
-                    CornerRadius="10" 
-                    BackgroundColor="#0F4C81" 
-                    TextColor="White" 
-                    FontSize="12" />
-
-            <Button Grid.Column="1" 
-                    Text="My&#10;Bookings" 
-                    HeightRequest="60" 
-                    CornerRadius="10" 
-                    BackgroundColor="White" 
-                    TextColor="#0F4C81" 
-                    FontSize="12" />
-
-            <Button Grid.Column="2" 
-                    Text="Home" 
-                    HeightRequest="60" 
-                    CornerRadius="10" 
-                    BackgroundColor="White" 
-                    TextColor="#0F4C81" 
-                    FontSize="12" />
-        </Grid>
+        
 
     </Grid>
 </ContentPage>

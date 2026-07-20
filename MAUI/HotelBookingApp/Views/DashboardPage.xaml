@@ -69,22 +69,32 @@
 
                     <Button
                         Text="Standard Room"
+                        TextColor="White"
+                        BackgroundColor="#0F4C81"
                         Clicked="StandardRoom_Clicked"/>
 
                     <Button
                         Text="Superior Room"
+                        TextColor="White"
+                        BackgroundColor="#0F4C81"
                         Clicked="SuperiorRoom_Clicked"/>
 
                     <Button
                         Text="Deluxe Room"
+                        TextColor="White"
+                        BackgroundColor="#0F4C81"
                         Clicked="DeluxeRoom_Clicked"/>
 
                     <Button
                         Text="Family Room"
+                        TextColor="White"
+                        BackgroundColor="#0F4C81"
                         Clicked="FamilyRoom_Clicked"/>
 
                     <Button
                         Text="Executive Suite"
+                        TextColor="White"
+                        BackgroundColor="#0F4C81"
                         Clicked="ExecutiveSuite_Clicked"/>
 
                 </VerticalStackLayout>
@@ -105,16 +115,22 @@
                     <Button
                         Grid.Column="0"
                         Text="Book&#10;Room"
+                        TextColor="White"
+                        BackgroundColor="#0F4C81"
                         Clicked="BookRoom_Clicked"/>
 
                     <Button
                         Grid.Column="1"
                         Text="Home"
+                        TextColor="White"
+                        BackgroundColor="#0F4C81"
                         Clicked="Home_Clicked"/>
 
                     <Button
                         Grid.Column="2"
                         Text="My&#10;Bookings"
+                        TextColor="White"
+                        BackgroundColor="#0F4C81"
                         Clicked="MyBookings_Clicked"/>
 
                 </Grid>
