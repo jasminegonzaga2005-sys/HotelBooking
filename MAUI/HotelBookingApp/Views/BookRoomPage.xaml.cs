@@ -17,4 +17,16 @@ public partial class BookRoomPage : ContentPage
     {
         await Navigation.PushAsync(_myBookingsPage);
     }
+
+    private async void Home_Clicked(object sender, EventArgs e)
+    {
+        if (Navigation.NavigationStack.Count > 1)
+        {
+            await Navigation.PopToRootAsync();
+        }
+        else
+        {
+            await DisplayAlert("Home", "You are already on the homepage.", "OK");
+        }
+    }
 }

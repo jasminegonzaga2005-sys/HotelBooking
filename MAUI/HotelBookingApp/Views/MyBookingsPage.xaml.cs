@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using HotelBookingApp.Services;
 using HotelBookingApp.ViewModels;
 using Microsoft.Maui.Controls;
@@ -9,12 +10,14 @@ public partial class MyBookingsPage : ContentPage
 {
     private readonly MyBookingsViewModel _viewModel;
     private readonly ApiService _apiService;
+    private readonly BookRoomPage _bookRoomPage;
 
-    public MyBookingsPage(MyBookingsViewModel viewModel, ApiService apiService)
+    public MyBookingsPage(MyBookingsViewModel viewModel, ApiService apiService, BookRoomPage bookRoomPage)
     {
         InitializeComponent();
         BindingContext = _viewModel = viewModel;
         _apiService = apiService;
+        _bookRoomPage = bookRoomPage;
     }
 
     protected override async void OnAppearing()
@@ -96,5 +99,45 @@ public partial class MyBookingsPage : ContentPage
 
         await _viewModel.LoadBookings();
         _viewModel.SelectedBooking = null;
+    }
+
+    // --- NAVIGATION BAR HANDLERS ---
+
+    private async void Home_Clicked(object sender, EventArgs e)
+    {
+        if (Navigation.NavigationStack.Count > 1)
+        {
+            await Navigation.PopToRootAsync();
+        }
+        else
+        {
+            await DisplayAlert("Home", "You are already on the homepage.", "OK");
+        }
+    }
+
+    private async void BookRoom_Clicked(object sender, EventArgs e)
+    {
+        if (_bookRoomPage == null)
+            return;
+
+        if (Navigation.NavigationStack.LastOrDefault() == _bookRoomPage)
+            return;
+
+        if (Navigation.NavigationStack.Contains(_bookRoomPage))
+        {
+            while (Navigation.NavigationStack.LastOrDefault() != _bookRoomPage && Navigation.NavigationStack.Count > 1)
+            {
+                await Navigation.PopAsync();
+            }
+        }
+        else
+        {
+            await Navigation.PushAsync(_bookRoomPage);
+        }
+    }
+
+    private async void MyBookings_Clicked(object sender, EventArgs e)
+    {
+        await DisplayAlert("My Bookings", "You are already on the My Bookings page.", "OK");
     }
 }
