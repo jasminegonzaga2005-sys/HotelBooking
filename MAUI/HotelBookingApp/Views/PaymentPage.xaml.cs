@@ -10,16 +10,12 @@ public partial class PaymentPage : ContentPage
     private Booking _booking;
     private readonly ApiService _apiService;
 
-    // The constructor now only requires what the DI container can inject automatically
     public PaymentPage(ApiService apiService)
     {
         InitializeComponent();
         _apiService = apiService;
     }
 
-    /// <summary>
-    /// Receives the booking data at runtime from the calling page and populates the UI labels.
-    /// </summary>
     public void InitializeBooking(Booking booking)
     {
         _booking = booking;
@@ -34,11 +30,15 @@ public partial class PaymentPage : ContentPage
         RoomRateLabel.Text = $"Room Rate per Night: ₱{_booking.Room.RoomType.PricePerNight:N2}";
         CheckInLabel.Text = $"Check-in: {_booking.CheckIn:MMMM dd, yyyy}";
         CheckOutLabel.Text = $"Check-out: {_booking.CheckOut:MMMM dd, yyyy}";
+
+        var nights = (_booking.CheckOut - _booking.CheckIn).Days;
+        NightsStayedLabel.Text = $"Nights Stayed: {(nights > 0 ? nights : 1)}";
+
         GuestsLabel.Text = $"Guests: {_booking.NumberOfGuests}";
         TotalLabel.Text = $"₱{_booking.TotalCost:N2}";
     }
 
-    private async void Pay_Clicked(object sender, EventArgs e)
+    private async void ProcessPayment(string paymentMethod)
     {
         if (_booking == null) return;
 
@@ -48,8 +48,8 @@ public partial class PaymentPage : ContentPage
 
             if (success)
             {
-                await DisplayAlert("Payment Successful", "Your booking has been confirmed.", "OK");
-                await Navigation.PopAsync(); // Return to My Bookings
+                await DisplayAlert("Success", "Payment received! Thank you", "OK");
+                await Navigation.PopAsync();
             }
             else
             {
@@ -58,9 +58,29 @@ public partial class PaymentPage : ContentPage
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Payment error: {ex.Message}");
+            Console.WriteLine($"Payment error using {paymentMethod}: {ex.Message}");
             await DisplayAlert("Error", "An error occurred while processing payment.", "OK");
         }
+    }
+
+    private void PayGCash_Clicked(object sender, EventArgs e)
+    {
+        ProcessPayment("GCash");
+    }
+
+    private void PayMaya_Clicked(object sender, EventArgs e)
+    {
+        ProcessPayment("PayMaya");
+    }
+
+    private void PayCredit_Clicked(object sender, EventArgs e)
+    {
+        ProcessPayment("Credit Card");
+    }
+
+    private void PayDebit_Clicked(object sender, EventArgs e)
+    {
+        ProcessPayment("Debit Card");
     }
 
     private async void Cancel_Clicked(object sender, EventArgs e)

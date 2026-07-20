@@ -43,7 +43,8 @@
                 <VerticalStackLayout Spacing="0">
 
                     <!-- hotel-name -->
-                    <Label Text="Hotel Name"
+                    <Label x:Name="HotelNameLabel"
+                           Text="Hotel Name"
                            TextColor="{StaticResource Primary}"
                            FontSize="22"
                            FontAttributes="Bold"
@@ -83,7 +84,7 @@
                                HorizontalOptions="End" 
                                VerticalOptions="Center">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding ViewReviewsCommand}" />
+                                <TapGestureRecognizer Tapped="OnViewReviewsTapped" />
                             </Label.GestureRecognizers>
                         </Label>
                     </Grid>
@@ -102,14 +103,15 @@
                             StrokeThickness="1"
                             Margin="0,0,0,18"
                             Padding="12,0">
-                        <Entry Placeholder="Rating 1-15"
+                        <Entry x:Name="RatingEntry"
+                               Placeholder="Rating 1-5"
                                Keyboard="Numeric"
                                TextColor="#333333"
                                FontSize="14" />
                     </Border>
 
                     <!-- field-label 2 -->
-                    <Label Text="Provide your feedback in below:"
+                    <Label Text="Provide your feedback below:"
                            TextColor="{StaticResource Primary}"
                            FontSize="14"
                            FontAttributes="None"
@@ -123,7 +125,8 @@
                             HeightRequest="80"
                             Margin="0,0,0,20"
                             Padding="12,4">
-                        <Editor Placeholder="Write your feedback here..."
+                        <Editor x:Name="FeedbackEditor"
+                                Placeholder="Write your feedback here..."
                                 AutoSize="Disabled"
                                 TextColor="#333333"
                                 FontSize="14" />
@@ -131,6 +134,7 @@
 
                     <!-- submit-btn -->
                     <Button Text="Submit"
+                            Clicked="OnSubmitClicked"
                             BackgroundColor="{StaticResource ButtonBg}"
                             TextColor="{StaticResource ButtonText}"
                             FontSize="15"

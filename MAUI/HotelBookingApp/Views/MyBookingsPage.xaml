@@ -1,162 +1,297 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:HotelBookingApp"
+             xmlns:converters="clr-namespace:HotelBookingApp.Converters"
              x:Class="HotelBookingApp.Views.MyBookingsPage"
+             Title="My Bookings"
              BackgroundColor="#F4F8FB">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <!-- Uncomment once you implement BookingStatusColorConverter -->
-            <!-- <local:BookingStatusColorConverter x:Key="StatusColorConverter" /> -->
+            <!-- Converter for dynamic status color coding -->
+            <converters:BookingStatusColorConverter x:Key="BookingStatusColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="Auto, *, Auto" Padding="20" RowSpacing="15">
+    <!-- Main Container using AbsoluteLayout/Grid Overlay for Modal Popup support -->
+    <Grid RowDefinitions="*">
 
-        <!-- Title -->
-        <Label Grid.Row="0"
-               Text="My Bookings"
-               FontSize="28"
-               FontAttributes="Bold"
-               TextColor="#0F4C81"
-               Margin="5,10,0,5" />
+        <!-- Main Application Interface Grid -->
+        <Grid RowDefinitions="Auto,*,Auto,Auto" 
+              Padding="20" 
+              RowSpacing="15" 
+              MaximumWidthRequest="480"
+              HorizontalOptions="Center"
+              BackgroundColor="#F4F8FB">
 
-        <!-- Booking List -->
-        <Border Grid.Row="1"
-                BackgroundColor="White"
-                Stroke="#D8E2EC"
-                StrokeThickness="1"
-                Padding="15">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="16" />
-            </Border.StrokeShape>
+            <!-- Row 0: Title -->
+            <Label Grid.Row="0"
+                   Text="My Bookings"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#0F4C81" />
 
-            <CollectionView ItemsSource="{Binding Bookings}"
-                            SelectionMode="Single"
-                            SelectedItem="{Binding SelectedBooking}">
+            <!-- Row 1: Booking List Container -->
+            <Border Grid.Row="1"
+                    BackgroundColor="White"
+                    Stroke="#D8E2EC"
+                    StrokeThickness="1"
+                    Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
 
-                <CollectionView.EmptyView>
-                    <Label Text="No bookings found."
-                           TextColor="Gray"
-                           FontSize="16"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center" />
-                </CollectionView.EmptyView>
+                <CollectionView ItemsSource="{Binding Bookings}"
+                                SelectedItem="{Binding SelectedBooking, Mode=TwoWay}"
+                                SelectionMode="Single">
 
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-                </CollectionView.ItemsLayout>
+                    <!-- EmptyView shown when there are no bookings -->
+                    <CollectionView.EmptyView>
+                        <Label Text="No bookings found."
+                               TextColor="Gray"
+                               FontSize="16"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </CollectionView.EmptyView>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Margin="0,5" Padding="15">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="12" />
-                            </Border.StrokeShape>
+                    <!-- DataTemplate for Individual Cards -->
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="0,5"
+                                    Padding="15"
+                                    BackgroundColor="#EAF2F8"
+                                    Stroke="#D8E2EC"
+                                    StrokeThickness="1">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="12" />
+                                </Border.StrokeShape>
 
-                            <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto"
-                                  ColumnDefinitions="*, Auto"
-                                  RowSpacing="8">
+                                <!-- Visual State Manager for Selection Border Highlight -->
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroupList>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="#EAF2F8" />
+                                                    <Setter Property="Stroke" Value="#D8E2EC" />
+                                                    <Setter Property="StrokeThickness" Value="1" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="#D6EAF8" />
+                                                    <Setter Property="Stroke" Value="#0F4C81" />
+                                                    <Setter Property="StrokeThickness" Value="3" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateGroupList>
+                                </VisualStateManager.VisualStateGroups>
 
-                                <!-- Room Number -->
-                                <Label Grid.Row="0" Grid.Column="0"
-                                       Text="{Binding Room.RoomNum, StringFormat='Room {0}'}"
-                                       FontSize="18"
-                                       FontAttributes="Bold"
-                                       TextColor="#0F4C81" />
+                                <!-- Card Content Grid -->
+                                <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+                                      ColumnDefinitions="*,Auto"
+                                      RowSpacing="8">
 
-                                <!-- Status -->
-                                <Label Grid.Row="0" Grid.Column="1"
-                                       Text="{Binding BookingStatus}"
-                                       FontAttributes="Bold"
-                                       HorizontalTextAlignment="End"
-                                       TextColor="#F57C00" />
-
-                                <!-- Room Type -->
-                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                       Text="{Binding Room.RoomType.RoomTypeName, StringFormat='Type: {0}'}"
-                                       TextColor="#444444"
-                                       FontSize="14" />
-
-                                <!-- Dates -->
-                                <VerticalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Spacing="3">
-                                    <Label Text="{Binding CheckIn, StringFormat='Check-in: {0:MMMM dd, yyyy}'}" TextColor="#444444" FontSize="14" />
-                                    <Label Text="{Binding CheckOut, StringFormat='Check-out: {0:MMMM dd, yyyy}'}" TextColor="#444444" FontSize="14" />
-                                    <Label Text="{Binding NightsStayed, StringFormat='Nights Stayed: {0}'}" TextColor="#444444" FontSize="14" />
-                                </VerticalStackLayout>
-
-                                <!-- Guests & Cost -->
-                                <VerticalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Spacing="3">
-                                    <Label Text="{Binding NumberOfGuests, StringFormat='Guests: {0}'}" TextColor="#444444" FontSize="14" />
-                                    <Label Text="{Binding TotalCost, StringFormat='Total: ₱{0:N2}'}" FontAttributes="Bold" TextColor="#0F4C81" />
-                                </VerticalStackLayout>
-
-                                <!-- Amenities -->
-                                <VerticalStackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Spacing="6" Padding="0,6,0,0">
-                                    <BoxView HeightRequest="1" Color="#D8E2EC" Margin="0,0,0,4" />
-                                    <Label Text="AMENITIES ADDED"
-                                           FontSize="12"
+                                    <!-- Room Title -->
+                                    <Label Grid.Row="0" Grid.Column="0"
+                                           Text="{Binding Room.RoomNum, StringFormat='Room {0}'}"
+                                           FontSize="18"
                                            FontAttributes="Bold"
                                            TextColor="#0F4C81" />
 
-                                    
-                                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Amenities}" Spacing="6">
-                                        <BindableLayout.EmptyView>
-                                            <Label Text="No amenities added"
-                                                   FontSize="12"
-                                                   TextColor="#888888"
-                                                   FontAttributes="Italic" />
-                                        </BindableLayout.EmptyView>
-                                        <BindableLayout.ItemTemplate>
-                                            <DataTemplate>
-                                                <Border Margin="0,0,6,6"
-                                                        BackgroundColor="White"
-                                                        Stroke="#D8E2EC"
-                                                        StrokeThickness="1"
-                                                        Padding="10,4">
-                                                    <Border.StrokeShape>
-                                                        <RoundRectangle CornerRadius="12" />
-                                                    </Border.StrokeShape>
-                                                    <Label Text="{Binding DisplayText}"
-                                                           FontSize="12"
-                                                           FontAttributes="Bold"
-                                                           TextColor="#0F4C81" />
-                                                </Border>
-                                            </DataTemplate>
-                                        </BindableLayout.ItemTemplate>
+                                    <!-- Booking Status -->
+                                    <Label Grid.Row="0" Grid.Column="1"
+                                           Text="{Binding BookingStatus}"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="End"
+                                           TextColor="{Binding BookingStatus, Converter={StaticResource BookingStatusColorConverter}}" />
+
+                                    <!-- Room Type -->
+                                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                           Text="{Binding Room.RoomType.RoomTypeName, StringFormat='Type: {0}'}"
+                                           TextColor="#444444"
+                                           FontSize="14" />
+
+                                    <!-- Dates Stack -->
+                                    <VerticalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Spacing="3">
+                                        <Label Text="{Binding CheckIn, StringFormat='Check-in: {0:MMMM dd, yyyy}'}"
+                                               TextColor="#444444"
+                                               FontSize="14" />
+                                        <Label Text="{Binding CheckOut, StringFormat='Check-out: {0:MMMM dd, yyyy}'}"
+                                               TextColor="#444444"
+                                               FontSize="14" />
+                                        <Label Text="{Binding NightsStayed, StringFormat='Nights Stayed: {0}'}"
+                                               TextColor="#444444"
+                                               FontSize="14" />
                                     </VerticalStackLayout>
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Border>
 
-        <!-- Bottom Buttons -->
-        <Grid Grid.Row="2" ColumnDefinitions="*, *" ColumnSpacing="10">
-            <Button Grid.Column="0"
-                    Text="Continue to Payment"
-                    HeightRequest="50"
-                    FontSize="14"
-                    FontAttributes="Bold"
-                    BackgroundColor="#0F4C81"
-                    TextColor="White"
-                    CornerRadius="10"
-                    Command="{Binding ContinuePaymentCommand}" />
+                                    <!-- Details Stack -->
+                                    <VerticalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Spacing="3">
+                                        <Label Text="{Binding NumberOfGuests, StringFormat='Guests: {0}'}"
+                                               TextColor="#444444"
+                                               FontSize="14" />
+                                        <Label Text="{Binding TotalCost, StringFormat='Total: ₱{0:N2}'}"
+                                               FontAttributes="Bold"
+                                               TextColor="#0F4C81"
+                                               FontSize="14" />
+                                    </VerticalStackLayout>
 
-            <Button Grid.Column="1"
-                    Text="Cancel Booking"
-                    HeightRequest="50"
-                    FontSize="14"
-                    FontAttributes="Bold"
-                    BackgroundColor="#EAF2F8"
-                    TextColor="#0F4C81"
-                    BorderColor="#0F4C81"
-                    BorderWidth="1"
-                    CornerRadius="10"
-                    Command="{Binding CancelBookingCommand}" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
+
+            <!-- Row 2: Action Buttons Grid -->
+            <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button Grid.Column="0"
+                        Text="Continue to Payment"
+                        HeightRequest="50"
+                        FontSize="14"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        BackgroundColor="#0F4C81"
+                        TextColor="White"
+                        Clicked="ContinuePayment_Clicked" />
+
+                <Button Grid.Column="1"
+                        Text="Cancel Booking"
+                        HeightRequest="50"
+                        FontSize="14"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        BackgroundColor="#EAF2F8"
+                        TextColor="#0F4C81"
+                        BorderColor="#0F4C81"
+                        BorderWidth="1"
+                        Clicked="CancelBooking_Clicked" />
+            </Grid>
+
+            <!-- Row 3: Bottom Navigation Bar -->
+            <Grid Grid.Row="3" ColumnDefinitions="*,*,*" ColumnSpacing="10" Padding="15" BackgroundColor="#EAF2F8">
+                <Grid.Clip>
+                    <RoundRectangleGeometry CornerRadius="10" />
+                </Grid.Clip>
+
+                <Button Grid.Column="0"
+                        Text="Book&#10;Room"
+                        HeightRequest="60"
+                        CornerRadius="10"
+                        BackgroundColor="White"
+                        TextColor="#0F4C81"
+                        FontSize="14" />
+
+                <Button Grid.Column="1"
+                        Text="My&#10;Bookings"
+                        HeightRequest="60"
+                        CornerRadius="10"
+                        BackgroundColor="#0F4C81"
+                        TextColor="White"
+                        FontSize="14" />
+
+                <Button Grid.Column="2"
+                        Text="Home"
+                        HeightRequest="60"
+                        CornerRadius="10"
+                        BackgroundColor="White"
+                        TextColor="#0F4C81"
+                        FontSize="14" />
+            </Grid>
+
         </Grid>
+
+        <!-- Policy Modal Overlay (Hidden by default via IsVisible) -->
+        <Grid x:Name="PolicyOverlay"
+              BackgroundColor="#80000000"
+              IsVisible="False"
+              HorizontalOptions="Fill"
+              VerticalOptions="Fill">
+
+            <Border BackgroundColor="White"
+                    WidthRequest="380"
+                    MaximumHeightRequest="600"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Padding="0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+
+                <Grid RowDefinitions="Auto,*,Auto">
+
+                    <!-- Modal Header -->
+                    <VerticalStackLayout Grid.Row="0" Padding="20,20,20,15" Spacing="4">
+                        <Label Text="Booking Policy" FontSize="20" FontAttributes="Bold" TextColor="#0F4C81" />
+                        <Label Text="Please review before continuing to payment" FontSize="13" TextColor="#666666" />
+                        <BoxView HeightRequest="1" Color="#EAF2F8" Margin="0,10,0,0" HorizontalOptions="Fill" />
+                    </VerticalStackLayout>
+
+                    <!-- Modal Body -->
+                    <ScrollView Grid.Row="1" Padding="20">
+                        <VerticalStackLayout Spacing="12">
+                            <Label Text="Cancellation Policy" FontSize="14" FontAttributes="Bold" TextColor="#0F4C81" />
+                            <Label Text="• Free cancellation up to 48 hours before check-in.&#10;• Cancellations within 48 hours are charged one night's stay.&#10;• No-shows are charged the full booking amount."
+                                   FontSize="13" TextColor="#555555" LineHeight="1.3" />
+
+                            <Label Text="Payment Terms" FontSize="14" FontAttributes="Bold" TextColor="#0F4C81" Margin="0,8,0,0" />
+                            <Label Text="• Full payment is required to confirm your reservation.&#10;• Prices are inclusive of applicable taxes unless stated otherwise."
+                                   FontSize="13" TextColor="#555555" LineHeight="1.3" />
+
+                            <Label Text="Check-in / Check-out" FontSize="14" FontAttributes="Bold" TextColor="#0F4C81" Margin="0,8,0,0" />
+                            <Label Text="• Check-in starts at 2:00 PM, check-out is by 12:00 PM.&#10;• Valid government ID is required at check-in."
+                                   FontSize="13" TextColor="#555555" LineHeight="1.3" />
+
+                            <!-- Agree Checkbox Row -->
+                            <Border BackgroundColor="#F4F8FB" Stroke="#D8E2EC" StrokeThickness="1" Padding="12" Margin="0,10,0,0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="8" />
+                                </Border.StrokeShape>
+                                <HorizontalStackLayout Spacing="10">
+                                    <CheckBox x:Name="AgreeCheckBox"
+                                              CheckedChanged="AgreeCheckBox_CheckedChanged"
+                                              VerticalOptions="Center" />
+                                    <Label Text="I have read and agree to the booking policy above."
+                                           FontSize="13"
+                                           TextColor="#333333"
+                                           VerticalOptions="Center"
+                                           MaximumWidthRequest="260" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </VerticalStackLayout>
+                    </ScrollView>
+
+                    <!-- Modal Footer -->
+                    <VerticalStackLayout Grid.Row="2" Padding="20,15,20,20">
+                        <BoxView HeightRequest="1" Color="#EAF2F8" Margin="0,0,0,15" HorizontalOptions="Fill" />
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <Button Grid.Column="0"
+                                    Text="Cancel"
+                                    HeightRequest="44"
+                                    CornerRadius="8"
+                                    BackgroundColor="#F4F8FB"
+                                    TextColor="#666666"
+                                    BorderColor="#D8E2EC"
+                                    BorderWidth="1"
+                                    Clicked="CloseModal_Clicked" />
+
+                            <Button x:Name="AcceptButton"
+                                    Grid.Column="1"
+                                    Text="Accept &amp; Continue"
+                                    HeightRequest="44"
+                                    CornerRadius="8"
+                                    BackgroundColor="#0F4C81"
+                                    TextColor="White"
+                                    IsEnabled="False"
+                                    Clicked="AcceptModal_Clicked" />
+                        </Grid>
+                    </VerticalStackLayout>
+
+                </Grid>
+            </Border>
+        </Grid>
+
     </Grid>
+
 </ContentPage>
