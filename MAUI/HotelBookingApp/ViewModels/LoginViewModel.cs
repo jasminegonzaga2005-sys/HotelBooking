@@ -44,6 +44,45 @@ namespace HotelBookingApp.ViewModels
 
         public ICommand RegisterCommand { get; }
 
+        //private async Task LoginAsync()
+        //{
+        //    if (IsBusy)
+        //        return;
+
+        //    IsBusy = true;
+
+        //    try
+        //    {
+        //        var customer = await _apiService.LoginAsync(Email, Password);
+
+        //        if (customer != null)
+        //        {
+        //            App.CurrentUser = customer;
+
+        //            var dashboardPage =
+        //                Application.Current?.Windows[0].Page?
+        //                .Handler?.MauiContext?.Services
+        //                .GetService<DashboardPage>();
+
+        //            if (dashboardPage != null)
+        //            {
+        //                await Application.Current.MainPage.Navigation.PushAsync(dashboardPage);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            await Application.Current.MainPage.DisplayAlert(
+        //                "Login Failed",
+        //                "Invalid email or password.",
+        //                "OK");
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        IsBusy = false;
+        //    }
+        //}
+
         private async Task LoginAsync()
         {
             if (IsBusy)
@@ -53,20 +92,30 @@ namespace HotelBookingApp.ViewModels
 
             try
             {
-                var customer = await _apiService.LoginAsync(Email, Password);
+                var user = await _apiService.LoginAsync(Email, Password);
 
-                if (customer != null)
+                if (user != null)
                 {
-                    App.CurrentUser = customer;
+                    App.CurrentUser = user;
 
-                    var dashboardPage =
-                        Application.Current?.Windows[0].Page?
-                        .Handler?.MauiContext?.Services
-                        .GetService<DashboardPage>();
+                    Page? nextPage = null;
 
-                    if (dashboardPage != null)
+                    if (user.Role == "Customer")
                     {
-                        await Application.Current.MainPage.Navigation.PushAsync(dashboardPage);
+                        nextPage = Application.Current?.Windows[0].Page?
+                            .Handler?.MauiContext?.Services
+                            .GetService<DashboardPage>();
+                    }
+                    else if (user.Role == "Admin")
+                    {
+                        nextPage = Application.Current?.Windows[0].Page?
+                            .Handler?.MauiContext?.Services
+                            .GetService<AllocationWindow>();
+                    }
+
+                    if (nextPage != null)
+                    {
+                        await Application.Current.MainPage.Navigation.PushAsync(nextPage);
                     }
                 }
                 else

@@ -63,12 +63,12 @@
                                FontSize="15" 
                                Margin="0,0,8,0" /> -->
 
-                        <Label Grid.Column="1" 
+                        <!--<Label Grid.Column="1" 
                                Text="Rating" 
                                TextColor="{StaticResource Primary}" 
                                FontAttributes="None" 
                                FontSize="14" 
-                               Margin="0,0,8,0" />
+                               Margin="0,0,8,0" /> --> 
 
                         <Label Grid.Column="2" 
                                Text="33 reviews" 

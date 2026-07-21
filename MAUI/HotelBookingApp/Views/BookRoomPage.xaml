@@ -42,66 +42,33 @@
                             <Border Stroke="#D8E2EC" StrokeShape="RoundRectangle 8" HeightRequest="45">
                                 <Picker Title="Select Room Type" 
                                         BackgroundColor="#F8FAFC" 
-                                        TextColor="#1F2937">
-                                    <Picker.ItemsSource>
-                                        <x:Array Type="{x:Type x:String}">
-                                            <x:String>Standard Room — ₱1,500/night</x:String>
-                                            <x:String>Superior Room — ₱2,200/night</x:String>
-                                            <x:String>Deluxe Room — ₱3,200/night</x:String>
-                                            <x:String>Family Room — ₱4,000/night</x:String>
-                                            <x:String>Executive Suite — ₱5,500/night</x:String>
-                                        </x:Array>
-                                    </Picker.ItemsSource>
-                                </Picker>
+                                        TextColor="#1F2937"
+                                        ItemsSource="{Binding RoomTypes}"
+                                        ItemDisplayBinding="{Binding RoomTypeName}"
+                                        SelectedItem="{Binding SelectedRoomType, Mode=TwoWay}">
+                                    
+                                </Picker>   
                             </Border>
                         </VerticalStackLayout>
 
-                        <!-- Available Rooms List Box -->
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Available Rooms" 
-                                   FontAttributes="Bold" 
-                                   TextColor="#0F4C81" />
+                        <Label Text="{Binding SelectedRoomType.RoomTypeName, StringFormat='Chosen room: {0}'}"
+                           TextColor="#0F4C81"
+                           HorizontalOptions="Center" />
 
-                            <Border Stroke="#D8E2EC" 
-                                    StrokeShape="RoundRectangle 12" 
-                                    BackgroundColor="White">
-                                <VerticalStackLayout>
-                                    <!-- Room 101 -->
-                                    <Grid ColumnDefinitions="*, Auto" Padding="18,15">
-                                        <Label Grid.Column="0" Text="101" FontAttributes="Bold" FontSize="17" TextColor="#0F4C81" VerticalOptions="Center" />
-                                        <Label Grid.Column="1" Text="Room 101" TextColor="#1F2937" VerticalOptions="Center" />
-                                    </Grid>
-                                    <BoxView HeightRequest="1" Color="#E8EEF5" />
+                        <!-- Available Rooms Display -->
+                        <Border Stroke="#D8E2EC" StrokeShape="RoundRectangle 12" BackgroundColor="White" HeightRequest="250">
+                            <CollectionView ItemsSource="{Binding FilteredRooms}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="*, Auto" Padding="18,15">
+                                            <Label Grid.Column="0" Text="{Binding RoomID}" FontAttributes="None" TextColor="#0F4C81" />
+                                            <Label Grid.Column="1" Text="{Binding RoomType.RoomTypeName}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Border>
 
-                                    <!-- Room 102 -->
-                                    <Grid ColumnDefinitions="*, Auto" Padding="18,15">
-                                        <Label Grid.Column="0" Text="102" FontAttributes="Bold" FontSize="17" TextColor="#0F4C81" VerticalOptions="Center" />
-                                        <Label Grid.Column="1" Text="Room 102" TextColor="#1F2937" VerticalOptions="Center" />
-                                    </Grid>
-                                    <BoxView HeightRequest="1" Color="#E8EEF5" />
-
-                                    <!-- Room 103 -->
-                                    <Grid ColumnDefinitions="*, Auto" Padding="18,15">
-                                        <Label Grid.Column="0" Text="103" FontAttributes="Bold" FontSize="17" TextColor="#0F4C81" VerticalOptions="Center" />
-                                        <Label Grid.Column="1" Text="Room 103" TextColor="#1F2937" VerticalOptions="Center" />
-                                    </Grid>
-                                    <BoxView HeightRequest="1" Color="#E8EEF5" />
-
-                                    <!-- Room 104 -->
-                                    <Grid ColumnDefinitions="*, Auto" Padding="18,15">
-                                        <Label Grid.Column="0" Text="104" FontAttributes="Bold" FontSize="17" TextColor="#0F4C81" VerticalOptions="Center" />
-                                        <Label Grid.Column="1" Text="Room 104" TextColor="#1F2937" VerticalOptions="Center" />
-                                    </Grid>
-                                    <BoxView HeightRequest="1" Color="#E8EEF5" />
-
-                                    <!-- Room 105 -->
-                                    <Grid ColumnDefinitions="*, Auto" Padding="18,15">
-                                        <Label Grid.Column="0" Text="105" FontAttributes="Bold" FontSize="17" TextColor="#0F4C81" VerticalOptions="Center" />
-                                        <Label Grid.Column="1" Text="Room 105" TextColor="#1F2937" VerticalOptions="Center" />
-                                    </Grid>
-                                </VerticalStackLayout>
-                            </Border>
-                        </VerticalStackLayout>
 
                         <!-- Room ID Input -->
                         <VerticalStackLayout Spacing="5">
@@ -112,7 +79,8 @@
                                 <Entry Keyboard="Numeric" 
                                        Placeholder="Example: 101" 
                                        BackgroundColor="#F8FAFC" 
-                                       TextColor="#1F2937" />
+                                       TextColor="#1F2937"
+                                       Text="{Binding RoomIdInput, Mode=TwoWay}"/>
                             </Border>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
@@ -137,7 +105,8 @@
                                    FontAttributes="Bold" 
                                    TextColor="#0F4C81" />
                             <Border Stroke="#D8E2EC" StrokeShape="RoundRectangle 8" HeightRequest="45">
-                                <DatePicker BackgroundColor="#F8FAFC" TextColor="#1F2937" />
+                                <DatePicker BackgroundColor="#F8FAFC" TextColor="#1F2937" 
+                                            Date="{Binding CheckInDate}"/>
                             </Border>
                         </VerticalStackLayout>
 
@@ -147,7 +116,8 @@
                                    FontAttributes="Bold" 
                                    TextColor="#0F4C81" />
                             <Border Stroke="#D8E2EC" StrokeShape="RoundRectangle 8" HeightRequest="45">
-                                <DatePicker BackgroundColor="#F8FAFC" TextColor="#1F2937" />
+                                <DatePicker BackgroundColor="#F8FAFC" TextColor="#1F2937" 
+                                            Date="{Binding CheckOutDate}"/>
                             </Border>
                         </VerticalStackLayout>
 
@@ -160,7 +130,8 @@
                                 <Entry Keyboard="Numeric" 
                                        Placeholder="Enter number of guests" 
                                        BackgroundColor="#F8FAFC" 
-                                       TextColor="#1F2937" />
+                                       TextColor="#1F2937" 
+                                       Text="{Binding Guests}"/>
                             </Border>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
@@ -168,6 +139,7 @@
 
                 <!-- Book Now Button -->
                 <Button Text="Book Now" 
+                        Command="{Binding BookRoomCommand}"
                         HeightRequest="50" 
                         CornerRadius="10" 
                         FontSize="16" 

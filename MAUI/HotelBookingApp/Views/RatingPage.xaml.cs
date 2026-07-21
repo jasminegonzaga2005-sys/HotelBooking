@@ -55,7 +55,6 @@ public partial class RatingPage : ContentPage
 
     //private async void OnViewReviewsTapped(object sender, TappedEventArgs e)
     //{
-    //    // Navigate to ReviewsPage
-    //    await Navigation.PushAsync(new ReviewsPage());
+    //    await Navigation.PushAsync(new FeedbackPage());
     //}
 }

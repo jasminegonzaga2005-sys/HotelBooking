@@ -56,13 +56,57 @@ namespace HotelBookingApp.ViewModels
             set => SetProperty(ref _isBusy, value);
         }
 
+        private RoomType? _selectedRoomType;
+        public RoomType? SelectedRoomType
+        {
+            get => _selectedRoomType;
+            set
+            {
+                if (SetProperty(ref _selectedRoomType, value))
+                {
+                    FilterRoomsByType();
+                }
+            }
+        }
+
+        private string _roomIdInput;
+        public string RoomIdInput
+        {
+            get => _roomIdInput;
+            set
+            {
+                if (SetProperty(ref _roomIdInput, value))
+                    TrySelectRoomById();
+            }
+        }
 
 
         public ICommand SelectRoomCommand { get; }
 
         public ICommand BookRoomCommand { get; }
+        public ObservableCollection<RoomType> RoomTypes { get; } = new();
+        public ObservableCollection<Room> FilteredRooms { get; } = new();
 
+        private void TrySelectRoomById()
+        {
+            if (int.TryParse(RoomIdInput, out int id))
+                SelectedRoom = AvailableRooms.FirstOrDefault(r => r.RoomID == id);
+        }
 
+        private void FilterRoomsByType()
+        {
+            FilteredRooms.Clear();
+            if (SelectedRoomType == null) return;
+
+            var filtered = AvailableRooms
+                .Where(r => r.RoomType.RoomTypeID == SelectedRoomType.RoomTypeID)
+                .ToList();
+
+            foreach (var room in filtered)
+                FilteredRooms.Add(room);
+
+            Console.WriteLine($"Filtered {FilteredRooms.Count} rooms for {SelectedRoomType.RoomTypeName}");
+        }
 
         public BookRoomViewModel(ApiService apiService)
         {
@@ -99,36 +143,71 @@ namespace HotelBookingApp.ViewModels
 
 
 
+        //private async Task LoadAvailableRooms()
+        //{
+        //    try
+        //    {
+        //        AvailableRooms.Clear();
+
+
+        //        var rooms = await _apiService.GetAvailableRooms();
+
+
+        //        if (rooms == null)
+        //            return;
+
+
+
+        //        foreach (var room in rooms)
+        //        {
+        //            AvailableRooms.Add(room);
+        //        }
+
+
+        //        Console.WriteLine(
+        //            $"Loaded {AvailableRooms.Count} available rooms"
+        //        );
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(
+        //            $"Load rooms error: {ex.Message}"
+        //        );
+        //    }
+        //}
+
         private async Task LoadAvailableRooms()
         {
             try
             {
                 AvailableRooms.Clear();
-
+                RoomTypes.Clear();
 
                 var rooms = await _apiService.GetAvailableRooms();
-
 
                 if (rooms == null)
                     return;
 
-
-
                 foreach (var room in rooms)
                 {
                     AvailableRooms.Add(room);
+
+                    // Add distinct room types
+                    if (!RoomTypes.Any(rt => rt.RoomTypeID == room.RoomType.RoomTypeID))
+                        RoomTypes.Add(room.RoomType);
                 }
 
-
-                Console.WriteLine(
-                    $"Loaded {AvailableRooms.Count} available rooms"
-                );
+                // 🔍 Debug output
+                foreach (var room in AvailableRooms)
+                {
+                    Console.WriteLine($"RoomNum: {room.RoomNum}, RoomID: {room.RoomID}, " +
+                                      $"TypeID: {room.RoomType.RoomTypeID}, " +
+                                      $"TypeName: {room.RoomType.RoomTypeName}");
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(
-                    $"Load rooms error: {ex.Message}"
-                );
+                Console.WriteLine($"Load rooms error: {ex.Message}");
             }
         }
 
