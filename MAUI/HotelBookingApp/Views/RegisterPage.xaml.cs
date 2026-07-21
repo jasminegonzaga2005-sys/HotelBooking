@@ -13,6 +13,7 @@ namespace HotelBookingApp.Views
             // Set the BindingContext for MVVM
             InitializeComponent();
             _apiService = apiService;
+            BindingContext = new RegisterViewModel(_apiService, new DashboardPage());
         }
 
         // Navigate back to the Login page

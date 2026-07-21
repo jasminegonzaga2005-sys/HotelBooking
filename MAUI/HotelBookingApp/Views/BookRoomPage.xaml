@@ -39,7 +39,7 @@
                             <Label Text="Room Type" 
                                    FontAttributes="Bold" 
                                    TextColor="#0F4C81" />
-                            <Border Stroke="#D8E2EC" StrokeShape="RoundRectangle 8" HeightRequest="45">
+                            <Border Stroke="#D8E2EC" StrokeShape="RoundRectangle 8" HeightRequest="40">
                                 <Picker Title="Select Room Type" 
                                         BackgroundColor="#F8FAFC" 
                                         TextColor="#1F2937"
@@ -53,6 +53,7 @@
 
                         <Label Text="{Binding SelectedRoomType.RoomTypeName, StringFormat='Chosen room: {0}'}"
                            TextColor="#0F4C81"
+                           FontAttributes="Bold"
                            HorizontalOptions="Center" />
 
                         <!-- Available Rooms Display -->

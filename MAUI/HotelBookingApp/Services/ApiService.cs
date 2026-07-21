@@ -26,7 +26,7 @@ namespace HotelBookingApp.Services
             return await _httpClient.GetFromJsonAsync<List<Customer>>("api/Customer");
         }
 
-        public async Task<bool> CreateCustomerAsync(Customer customer)
+        public async Task<Customer?> CreateCustomerAsync(Customer customer)
         {
             try
             {
@@ -36,28 +36,29 @@ namespace HotelBookingApp.Services
                     lastName = customer.LastName,
                     email = customer.Email,
                     phoneNum = customer.PhoneNum,
-                    passowrd = customer.Password,
-                    role = customer.Role,
-
+                    password = customer.Password,
+                    role = customer.Role
                 };
+
                 var response = await _httpClient.PostAsJsonAsync("api/Customer", requestBody);
+
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Customer created successfully.");
-                    return true;
-                }
+                    var createdCustomer = await response.Content.ReadFromJsonAsync<Customer>();
 
+                    Console.WriteLine("Customer created successfully.");
+                    return createdCustomer;
+                }
 
                 var error = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"Customer Creation failed: {error}");
-                return false;
+                return null;
             }
-        
             catch (Exception ex)
             {
                 Console.WriteLine($"Create Customer error: {ex.Message}");
-                return false;
-            };
+                return null;
+            }
         }
 
         //added this 

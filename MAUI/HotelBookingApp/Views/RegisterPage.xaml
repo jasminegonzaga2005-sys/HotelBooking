@@ -43,8 +43,9 @@
 
                         <Entry
                             Placeholder="Juan"
-                            Text="{Binding FirstName}"
-                            BackgroundColor="#F4F8FB"/>
+                            Text="{Binding FirstName, Mode=TwoWay}"
+                            BackgroundColor="#F4F8FB"
+                            TextColor="#0F4C81"/>
                     </VerticalStackLayout>
 
                     <!-- Last Name -->
@@ -56,8 +57,9 @@
 
                         <Entry
                             Placeholder="Dela Cruz"
-                            Text="{Binding LastName}"
-                            BackgroundColor="#F4F8FB"/>
+                            Text="{Binding LastName, Mode=TwoWay}"
+                            BackgroundColor="#F4F8FB"
+                            TextColor="#0F4C81"/>
                     </VerticalStackLayout>
 
                     <!-- Email -->
@@ -69,9 +71,10 @@
 
                         <Entry
                             Placeholder="example@email.com"
-                            Text="{Binding Email}"
+                            Text="{Binding Email, Mode=TwoWay}"
                             Keyboard="Email"
-                            BackgroundColor="#F4F8FB"/>
+                            BackgroundColor="#F4F8FB"
+                            TextColor="#0F4C81"/>
                     </VerticalStackLayout>
 
                     <!-- Phone -->
@@ -83,9 +86,10 @@
 
                         <Entry
                             Placeholder="09XXXXXXXXX"
-                            Text="{Binding PhoneNum}"
+                            Text="{Binding PhoneNum, Mode=TwoWay}"
                             Keyboard="Telephone"
-                            BackgroundColor="#F4F8FB"/>
+                            BackgroundColor="#F4F8FB"
+                            TextColor="#0F4C81"/>
                     </VerticalStackLayout>
 
                     <!-- Password -->
@@ -97,9 +101,10 @@
 
                         <Entry
                             Placeholder="Password"
-                            Text="{Binding Password}"
+                            Text="{Binding Password, Mode=TwoWay}"
                             IsPassword="True"
-                            BackgroundColor="#F4F8FB"/>
+                            BackgroundColor="#F4F8FB"
+                            TextColor="#0F4C81"/>
                     </VerticalStackLayout>
 
                     <!-- Confirm Password -->
@@ -113,7 +118,8 @@
                             Placeholder="Confirm Password"
                             Text="{Binding ConfirmPassword}"
                             IsPassword="True"
-                            BackgroundColor="#F4F8FB"/>
+                            BackgroundColor="#F4F8FB"
+                            TextColor="#0F4C81"/>
                     </VerticalStackLayout>
 
                     <!-- Register Button -->

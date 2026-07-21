@@ -25,11 +25,25 @@
               BackgroundColor="#F4F8FB">
 
             <!-- Row 0: Title -->
-            <Label Grid.Row="0"
+            <VerticalStackLayout Padding="20,10,20,0" Spacing="5">
+                <Label Grid.Row="0"
                    Text="My Bookings"
                    FontSize="28"
                    FontAttributes="Bold"
                    TextColor="#0F4C81" />
+
+                <Label Grid.Row="0"
+               Text="No Cancellation After Payment"
+               FontSize="18"
+               FontAttributes="Bold"
+               TextColor="#0F4C81"/>
+
+                <Label Grid.Row="0"
+               Text="All bookings are final once payment has been completed. Cancellations, refunds, or changes are not permitted after payment. Please review your booking details carefully before confirming your reservation."
+               FontSize="15"
+               TextColor="#0F4C81" />
+
+            </VerticalStackLayout>
 
             <!-- Row 1: Booking List Container -->
             <Border Grid.Row="1"

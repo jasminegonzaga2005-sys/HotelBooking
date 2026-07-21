@@ -13,23 +13,162 @@ namespace HotelBookingApp.ViewModels
         private readonly ApiService _apiService;
         private readonly DashboardPage _dashboardPage;
 
-        public RegisterViewModel(ApiService apiService, DashboardPage dashboardPage )
+        public RegisterViewModel(ApiService apiService, DashboardPage dashboardPage)
         {
             _apiService = apiService;
             RegisterCommand = new Command(async () => await RegisterAsync());
             _dashboardPage = dashboardPage;
         }
 
+        
+
         // Bound properties
-        public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string PhoneNum { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public string ConfirmPassword { get; set; } = string.Empty;
-        public string Role {  get; set; } = "Customer";
+        //public string FirstName { get; set; } = string.Empty;
+        //public string LastName { get; set; } = string.Empty;
+        //public string Email { get; set; } = string.Empty;
+        //public string PhoneNum { get; set; } = string.Empty;
+        //public string Password { get; set; } = string.Empty;
+        //public string ConfirmPassword { get; set; } = string.Empty;
+        //public string Role {  get; set; } = "Customer";
+
+        private string _firstName;
+        public string FirstName
+        {
+            get => _firstName;
+            set
+            {
+                if (_firstName != value)
+                {
+                    _firstName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _lastName;
+        public string LastName
+        {
+            get => _lastName;
+            set
+            {
+                if (_lastName != value)
+                {
+                    _lastName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _email;
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                if (_email != value)
+                {
+                    _email = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _phoneNum;
+        public string PhoneNum
+        {
+            get => _phoneNum;
+            set
+            {
+                if (_phoneNum != value)
+                {
+                    _phoneNum = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _password;
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                if (_password != value)
+                {
+                    _password = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _confirmPassword;
+        public string ConfirmPassword
+        {
+            get => _confirmPassword;
+            set
+            {
+                if (_confirmPassword != value)
+                {
+                    _confirmPassword = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _role = "Customer";
+        public string Role
+        {
+            get => _role;
+            set
+            {
+                if (_role != value)
+                {
+                    _role = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public ICommand RegisterCommand { get; }
+
+        //private async Task RegisterAsync()
+        //{
+        //    if (Password != ConfirmPassword)
+        //    {
+        //        await Application.Current.MainPage.DisplayAlert("Error", "Passwords do not match.", "OK");
+        //        return;
+        //    }
+
+        //    var newCustomer = new Customer
+        //    {
+        //        FirstName = FirstName,
+        //        LastName = LastName,
+        //        Email = Email,
+        //        Password = Password,
+        //        PhoneNum = PhoneNum,
+        //        Role = "Customer"
+        //    };
+
+        //    try
+        //    {
+        //        var createdCustomer = await _apiService.CreateCustomerAsync(newCustomer);
+
+        //        if (createdCustomer)
+        //        {
+        //            App.CurrentUser = newCustomer; // auto-login
+        //            await Application.Current.MainPage.DisplayAlert("Success", "Account created successfully!", "OK");
+        //            await Application.Current.MainPage.Navigation.PushAsync(_dashboardPage);
+        //        }
+        //        else
+        //        {
+        //            await Application.Current.MainPage.DisplayAlert("Error", "Registration failed.", "OK");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+        //    }
+        //}
 
         private async Task RegisterAsync()
         {
@@ -46,14 +185,14 @@ namespace HotelBookingApp.ViewModels
                 Email = Email,
                 Password = Password,
                 PhoneNum = PhoneNum,
-                Role = "Customer"
+                Role = Role
             };
 
             try
             {
                 var createdCustomer = await _apiService.CreateCustomerAsync(newCustomer);
 
-                if (createdCustomer)
+                if (createdCustomer != null)
                 {
                     App.CurrentUser = newCustomer; // auto-login
                     await Application.Current.MainPage.DisplayAlert("Success", "Account created successfully!", "OK");
