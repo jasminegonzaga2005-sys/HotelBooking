@@ -11,7 +11,7 @@
 
     <Grid RowDefinitions="Auto,*,Auto" Margin="16">
 
-        <!-- Header -->
+        <!-- ================= HEADER ================= -->
         <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,0,16">
             <VerticalStackLayout Grid.Column="0">
                 <HorizontalStackLayout Margin="0,0,0,4">
@@ -29,16 +29,18 @@
             </Border>
         </Grid>
 
-        <!-- Main Content -->
+        <!-- ================= MAIN CONTENT ================= -->
         <Border Grid.Row="1" BackgroundColor="#D9FFFFFF" Stroke="#99FFFFFF" StrokeShape="RoundRectangle 20" Padding="16">
-            <Grid RowDefinitions="Auto,*">
-                <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,0,12">
+            <VerticalStackLayout Spacing="12">
+
+                <!-- Section Header -->
+                <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,12">
                     <VerticalStackLayout Grid.Column="0">
                         <Label Text="Guest Feedback" FontSize="18" FontAttributes="Bold" TextColor="#1E293B"/>
                         <Label Text="Post-stay reviews submitted by guests, newest first." FontSize="11" TextColor="#64748B"/>
                     </VerticalStackLayout>
 
-                    <Picker Grid.Column="1" x:Name="ReviewFilterPicker" SelectedIndex="0" Title="Filter Rating" WidthRequest="120" FontSize="11">
+                    <Picker Grid.Column="1" Title="Filter Rating" WidthRequest="120" FontSize="11">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>All Ratings</x:String>
@@ -51,34 +53,58 @@
                     </Picker>
                 </Grid>
 
-                <!-- Reviews Grid View -->
-                <CollectionView Grid.Row="1" x:Name="ReviewsCollectionView">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="8" VerticalItemSpacing="8"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border BackgroundColor="#CCFFFFFF" Stroke="#E2E8F0" StrokeShape="RoundRectangle 12" Padding="12">
-                                <VerticalStackLayout Spacing="4">
-                                    <Grid ColumnDefinitions="*,Auto">
-                                        <VerticalStackLayout Grid.Column="0">
-                                            <Label Text="{Binding Guest}" FontAttributes="Bold" TextColor="#1E293B" FontSize="12"/>
-                                            <Label Text="{Binding Room, StringFormat='{0} Room'}" FontSize="9" TextColor="#94A3B8"/>
-                                        </VerticalStackLayout>
-                                        <Border Grid.Column="1" BackgroundColor="#ECFDF5" StrokeShape="RoundRectangle 8" Padding="6,2" VerticalOptions="Start">
-                                            <Label Text="{Binding Rating, StringFormat='{0} / 5'}" TextColor="#047857" FontSize="10" FontAttributes="Bold"/>
-                                        </Border>
-                                    </Grid>
-                                    <Label Text="{Binding Comment}" FontSize="10" TextColor="#475569" Margin="0,2,0,0"/>
-                                </VerticalStackLayout>
+                <!-- Review Entry 1 -->
+                <Border BackgroundColor="#CCFFFFFF" Stroke="#E2E8F0" StrokeShape="RoundRectangle 12" Padding="12">
+                    <VerticalStackLayout Spacing="4">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="Juan Dela Cruz" FontAttributes="Bold" TextColor="#1E293B" FontSize="12"/>
+                                <Label Text="Deluxe Room" FontSize="9" TextColor="#94A3B8"/>
+                            </VerticalStackLayout>
+                            <Border Grid.Column="1" BackgroundColor="#ECFDF5" StrokeShape="RoundRectangle 8" Padding="6,2" VerticalOptions="Start">
+                                <Label Text="5 / 5" TextColor="#047857" FontSize="10" FontAttributes="Bold"/>
                             </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </Grid>
+                        </Grid>
+                        <Label Text="Amazing stay! The staff were very accommodating and the room was spotless." FontSize="10" TextColor="#475569" Margin="0,2,0,0"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Review Entry 2 -->
+                <Border BackgroundColor="#CCFFFFFF" Stroke="#E2E8F0" StrokeShape="RoundRectangle 12" Padding="12">
+                    <VerticalStackLayout Spacing="4">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="Maria Santos" FontAttributes="Bold" TextColor="#1E293B" FontSize="12"/>
+                                <Label Text="Standard Room" FontSize="9" TextColor="#94A3B8"/>
+                            </VerticalStackLayout>
+                            <Border Grid.Column="1" BackgroundColor="#FEF3C7" StrokeShape="RoundRectangle 8" Padding="6,2" VerticalOptions="Start">
+                                <Label Text="4 / 5" TextColor="#B45309" FontSize="10" FontAttributes="Bold"/>
+                            </Border>
+                        </Grid>
+                        <Label Text="Comfortable room and good service, though breakfast options could be improved." FontSize="10" TextColor="#475569" Margin="0,2,0,0"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Review Entry 3 -->
+                <Border BackgroundColor="#CCFFFFFF" Stroke="#E2E8F0" StrokeShape="RoundRectangle 12" Padding="12">
+                    <VerticalStackLayout Spacing="4">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="Jose Reyes" FontAttributes="Bold" TextColor="#1E293B" FontSize="12"/>
+                                <Label Text="Suite Room" FontSize="9" TextColor="#94A3B8"/>
+                            </VerticalStackLayout>
+                            <Border Grid.Column="1" BackgroundColor="#FEE2E2" StrokeShape="RoundRectangle 8" Padding="6,2" VerticalOptions="Start">
+                                <Label Text="3 / 5" TextColor="#DC2626" FontSize="10" FontAttributes="Bold"/>
+                            </Border>
+                        </Grid>
+                        <Label Text="The room was spacious, but the air conditioning was a bit noisy at night." FontSize="10" TextColor="#475569" Margin="0,2,0,0"/>
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
         </Border>
 
-        <!-- Bottom Navigation -->
+        <!-- ================= BOTTOM NAVIGATION ================= -->
         <Border Grid.Row="2" BackgroundColor="#CCFFFFFF" Stroke="#E2E8F0" StrokeShape="RoundRectangle 16" Padding="4" HorizontalOptions="Center" WidthRequest="400" Margin="0,12,0,0">
             <Grid ColumnDefinitions="*,*,*">
                 <Button Grid.Column="0" Text="ALLOCATION" BackgroundColor="#EAF2F8" TextColor="#0F4C81" FontAttributes="Bold" FontSize="11" CornerRadius="12" Margin="2" Clicked="NavAllocation_Clicked"/>

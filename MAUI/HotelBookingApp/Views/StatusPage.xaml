@@ -11,7 +11,7 @@
 
     <Grid RowDefinitions="Auto,*,Auto" Margin="16">
 
-        <!-- Header -->
+        <!-- ================= HEADER ================= -->
         <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,0,16">
             <VerticalStackLayout Grid.Column="0">
                 <HorizontalStackLayout Margin="0,0,0,4">
@@ -29,9 +29,10 @@
             </Border>
         </Grid>
 
-        <!-- Main Content -->
+        <!-- ================= MAIN CONTENT ================= -->
         <Border Grid.Row="1" BackgroundColor="#D9FFFFFF" Stroke="#99FFFFFF" StrokeShape="RoundRectangle 20" Padding="16">
             <Grid RowDefinitions="Auto,*">
+                <!-- Section Header -->
                 <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Margin="0,0,0,12">
                     <VerticalStackLayout Grid.Column="0">
                         <Label Text="Status Console" FontSize="18" FontAttributes="Bold" TextColor="#1E293B"/>
@@ -42,41 +43,42 @@
                     </Border>
                 </Grid>
 
-                <!-- Status Console Table List -->
-                <CollectionView Grid.Row="1" x:Name="StatusCollectionView">
-                    <CollectionView.Header>
-                        <Grid ColumnDefinitions="*,*,*,*,Auto" Padding="8" BackgroundColor="#F8FAFC">
-                            <Label Grid.Column="0" Text="GUEST" FontAttributes="Bold" FontSize="10" TextColor="#64748B"/>
-                            <Label Grid.Column="1" Text="ROOM" FontAttributes="Bold" FontSize="10" TextColor="#64748B"/>
-                            <Label Grid.Column="2" Text="START" FontAttributes="Bold" FontSize="10" TextColor="#64748B"/>
-                            <Label Grid.Column="3" Text="END" FontAttributes="Bold" FontSize="10" TextColor="#64748B"/>
-                            <Label Grid.Column="4" Text="ACTIONS" FontAttributes="Bold" FontSize="10" TextColor="#64748B" WidthRequest="110"/>
-                        </Grid>
-                    </CollectionView.Header>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid ColumnDefinitions="*,*,*,*,Auto" Padding="8" VerticalOptions="Center">
-                                <Label Grid.Column="0" Text="{Binding Guest}" FontAttributes="Bold" FontSize="11" TextColor="#0F172A" VerticalOptions="Center"/>
-                                <Label Grid.Column="1" Text="{Binding RoomCode}" FontAttributes="Bold" FontSize="11" TextColor="#0F4C81" VerticalOptions="Center"/>
-                                <Label Grid.Column="2" Text="{Binding Start}" FontSize="11" VerticalOptions="Center"/>
-                                <Label Grid.Column="3" Text="{Binding End}" FontSize="11" VerticalOptions="Center"/>
-                                <Picker Grid.Column="4" Title="State" SelectedItem="{Binding Status}" WidthRequest="110" FontSize="10">
-                                    <Picker.ItemsSource>
-                                        <x:Array Type="{x:Type x:String}">
-                                            <x:String>Checked In</x:String>
-                                            <x:String>Checked Out</x:String>
-                                            <x:String>Cancelled</x:String>
-                                        </x:Array>
-                                    </Picker.ItemsSource>
-                                </Picker>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <!-- Hardcoded Table -->
+                <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" Padding="8">
+                    <!-- Header Row -->
+                    <Label Grid.Column="0" Text="GUEST" FontAttributes="Bold" FontSize="10" TextColor="#64748B"/>
+                    <Label Grid.Column="1" Text="ROOM" FontAttributes="Bold" FontSize="10" TextColor="#64748B"/>
+                    <Label Grid.Column="2" Text="START" FontAttributes="Bold" FontSize="10" TextColor="#64748B"/>
+                    <Label Grid.Column="3" Text="END" FontAttributes="Bold" FontSize="10" TextColor="#64748B"/>
+                    <Label Grid.Column="4" Text="STATUS" FontAttributes="Bold" FontSize="10" TextColor="#64748B"/>
+
+                    <!-- Row 1 -->
+                    <Label Grid.Row="1" Grid.Column="0" Text="Juan Dela Cruz" FontAttributes="Bold" TextColor="#000000"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="Room-103" FontAttributes="Bold" TextColor="#000000"/>
+                    <Label Grid.Row="1" Grid.Column="2" Text="2026-08-01" FontAttributes="Bold" TextColor="#000000"/>
+                    <Label Grid.Row="1" Grid.Column="3" Text="2026-08-03" FontAttributes="Bold" TextColor="#000000"/>
+                    <Label Grid.Row="1" Grid.Column="4" Text="Confirmed" FontAttributes="Bold" TextColor="#16A34A"/>
+
+                    <!-- Row 2 -->
+                    <Label Grid.Row="2" Grid.Column="0" Text="Maria Santos" FontAttributes="Bold" TextColor="#000000"/>
+                    <Label Grid.Row="2" Grid.Column="1" Text="Room-106" FontAttributes="Bold" TextColor="#000000"/>
+                    <Label Grid.Row="2" Grid.Column="2" Text="2026-08-05" FontAttributes="Bold" TextColor="#000000"/>
+                    <Label Grid.Row="2" Grid.Column="3" Text="2026-08-08" FontAttributes="Bold" TextColor="#000000"/>
+                    <Label Grid.Row="2" Grid.Column="4" Text="Confirmed" FontAttributes="Bold" TextColor="#16A34A"/>
+
+                    <!-- Row 3 -->
+                    <Label Grid.Row="3" Grid.Column="0" Text="Jose Reyes" FontAttributes="Bold" TextColor="#000000"/>
+                    <Label Grid.Row="3" Grid.Column="1" Text="Room-110" FontAttributes="Bold" TextColor="#000000"/>
+                    <Label Grid.Row="3" Grid.Column="2" Text="2026-08-10" FontAttributes="Bold" TextColor="#000000"/>
+                    <Label Grid.Row="3" Grid.Column="3" Text="2026-08-13" FontAttributes="Bold" TextColor="#000000"/>
+                    <Label Grid.Row="3" Grid.Column="4" Text="Pending" FontAttributes="Bold" TextColor="#EAB308"/>
+
+                    
+                </Grid>
             </Grid>
         </Border>
 
-        <!-- Bottom Navigation -->
+        <!-- ================= BOTTOM NAVIGATION ================= -->
         <Border Grid.Row="2" BackgroundColor="#CCFFFFFF" Stroke="#E2E8F0" StrokeShape="RoundRectangle 16" Padding="4" HorizontalOptions="Center" WidthRequest="400" Margin="0,12,0,0">
             <Grid ColumnDefinitions="*,*,*">
                 <Button Grid.Column="0" Text="ALLOCATION" BackgroundColor="#EAF2F8" TextColor="#0F4C81" FontAttributes="Bold" FontSize="11" CornerRadius="12" Margin="2" Clicked="NavAllocation_Clicked"/>
