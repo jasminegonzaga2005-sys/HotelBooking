@@ -44,7 +44,7 @@
 
                     <!-- hotel-name -->
                     <Label x:Name="HotelNameLabel"
-                           Text="Hotel Name"
+                           Text="How was your stay with us?"
                            TextColor="{StaticResource Primary}"
                            FontSize="22"
                            FontAttributes="Bold"
@@ -56,12 +56,12 @@
                           VerticalOptions="End" 
                           Margin="0,0,0,20">
 
-                        <Label Grid.Column="0" 
+                        <!--<Label Grid.Column="0" 
                                Text="4/5" 
                                TextColor="{StaticResource AccentOrange}" 
                                FontAttributes="Bold" 
                                FontSize="15" 
-                               Margin="0,0,8,0" />
+                               Margin="0,0,8,0" /> -->
 
                         <Label Grid.Column="1" 
                                Text="Rating" 
@@ -76,7 +76,7 @@
                                FontSize="12" />
 
                         <!-- view-reviews-link -->
-                        <Label Grid.Column="3" 
+                        <!--<Label Grid.Column="3" 
                                Text="View Reviews →" 
                                TextColor="{StaticResource Primary}" 
                                FontAttributes="Bold" 
@@ -86,7 +86,7 @@
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnViewReviewsTapped" />
                             </Label.GestureRecognizers>
-                        </Label>
+                        </Label> -->
                     </Grid>
 
                     <!-- field-label 1 -->

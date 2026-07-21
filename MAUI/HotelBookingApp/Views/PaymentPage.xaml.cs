@@ -50,7 +50,7 @@ public partial class PaymentPage : ContentPage
             if (success)
             {
                 await DisplayAlert("Success", "Payment received! Thank you", "OK");
-                await Navigation.PopAsync();
+                await Navigation.PushAsync(new RatingPage());
             }
             else
             {

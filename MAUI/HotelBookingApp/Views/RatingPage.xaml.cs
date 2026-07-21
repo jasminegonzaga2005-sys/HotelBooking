@@ -50,12 +50,12 @@ public partial class RatingPage : ContentPage
         await DisplayAlert("Thank You!", "Your feedback has been submitted successfully.", "OK");
 
         // Navigate back to the home/main screen
-        await Navigation.PopToRootAsync();
+        await Navigation.PushAsync(new DashboardPage());
     }
 
-    private async void OnViewReviewsTapped(object sender, TappedEventArgs e)
-    {
-        // Navigate to ReviewsPage
-        await Navigation.PushAsync(new ReviewsPage());
-    }
+    //private async void OnViewReviewsTapped(object sender, TappedEventArgs e)
+    //{
+    //    // Navigate to ReviewsPage
+    //    await Navigation.PushAsync(new ReviewsPage());
+    //}
 }
